@@ -114,15 +114,15 @@ public class Irudia extends MagickImage {
 	 * @throws IOException
 	 * @throws MagickException
 	 */
-	public void irudiaGorde(String filePath) throws IOException,
-			MagickException {
-		this.path = filePath + File.separator + fitxIzen;
-		this.setCompression(CompressionType.NoCompression);
-		info.setFileName(this.path);
-		this.setFileName(this.path);
-		this.writeImage(info);
-		fitxIrakurri(this.path);
-	}
+//	public void irudiaGorde(String filePath) throws IOException,
+//			MagickException {
+//		this.path = filePath + File.separator + fitxIzen;
+//		this.setCompression(CompressionType.NoCompression);
+//		info.setFileName(this.path);
+//		this.setFileName(this.path);
+//		this.writeImage(info);
+//		//fitxIrakurri(this.path);
+//	}
 
 	public String getFitxIzen() {
 		return fitxIzen;

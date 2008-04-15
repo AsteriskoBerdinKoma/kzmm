@@ -13,13 +13,13 @@ public class IrudiManager {
 
 	public static String PATH_TEST;
 
-	public static String TRAIN_SAVE_PATH;
+	public static String UNEKO_TRAIN_PATH;
 	
-	public static String TEST_SAVE_PATH;
+	public static String UNEKO_TEST_PATH;
 
-	private Vector<Irudia> vTrain;
+	private Vector<Irudia> vTrainOriginalak;
 
-	private Vector<Irudia> vTest;
+	private Vector<Irudia> vTestOriginalak;
 	
 	private Vector<Irudia> vTrainUnekoa;
 	private Vector<Irudia> vTestUnekoa;
@@ -27,53 +27,65 @@ public class IrudiManager {
 	public IrudiManager(String pathTrain, String pathTest) {
 		IrudiManager.PATH_TRAIN = pathTrain;
 		IrudiManager.PATH_TEST = pathTest;
+		IrudiManager.UNEKO_TRAIN_PATH = pathTrain;
+		IrudiManager.UNEKO_TEST_PATH = pathTest;
 	}
 
-	private Vector<Irudia> trainIrudiakKargatu() throws IOException,
+	private Vector<Irudia> irudiakKargatu(String path) throws IOException,
 			MagickException {
-		String[] fz = new File(PATH_TRAIN).list();
+		String[] fz = new File(path).list();
 
 		Vector<Irudia> vIrudiak = new Vector<Irudia>();
 		for (int i = 0; i < fz.length; i++) {
-			String filePath = PATH_TRAIN + File.separatorChar + fz[i];
+			String filePath = path + File.separatorChar + fz[i];
 			vIrudiak.addElement(new Irudia(new ImageInfo(filePath)));
 		}
 		return vIrudiak;
 	}
 
-	private Vector<Irudia> testIrudiakKargatu() throws IOException,
-			MagickException {
-		String[] fz = new File(PATH_TEST).list();
-
-		Vector<Irudia> vIrudiak = new Vector<Irudia>();
-		for (int i = 0; i < fz.length; i++) {
-			String filePath = PATH_TEST + File.separatorChar + fz[i];
-			vIrudiak.addElement(new Irudia(new ImageInfo(filePath)));
-		}
-		return vIrudiak;
+	public Vector<Irudia> getTrainOriginalak() throws IOException, MagickException {
+		if (vTrainOriginalak == null)
+			vTrainOriginalak = irudiakKargatu(PATH_TRAIN);
+		return vTrainOriginalak;
 	}
 
-	public Vector<Irudia> getTrainIrudiak() throws IOException, MagickException {
-		if (vTrain == null)
-			vTrain = trainIrudiakKargatu();
-		return vTrain;
+	public Vector<Irudia> getTestOriginalak() throws IOException, MagickException {
+		if (vTestOriginalak == null)
+			vTestOriginalak = irudiakKargatu(PATH_TEST);
+		return vTestOriginalak;
 	}
 
-	public Vector<Irudia> getTestIrudiak() throws IOException, MagickException {
-		if (vTest == null)
-			vTest = testIrudiakKargatu();
-		return vTest;
-	}
+	public Vector<Irudia> getAllOriginalak() throws IOException, MagickException {
+		if (vTrainOriginalak == null)
+			vTrainOriginalak = irudiakKargatu(PATH_TRAIN);
+		if (vTestOriginalak == null)
+			vTestOriginalak = irudiakKargatu(PATH_TEST);
 
-	public Vector<Irudia> getAllIrudiak() throws IOException, MagickException {
-		if (vTrain == null)
-			vTrain = trainIrudiakKargatu();
-		if (vTest == null)
-			vTest = testIrudiakKargatu();
-
-		Vector<Irudia> emaitza = new Vector<Irudia>(vTrain);
-		emaitza.addAll(vTest);
+		Vector<Irudia> emaitza = new Vector<Irudia>(vTrainOriginalak);
+		emaitza.addAll(vTestOriginalak);
 		return emaitza;
 	}
 
+	public Vector<Irudia> getUnekoTrain() throws IOException, MagickException{
+		if (vTrainUnekoa == null)
+			vTrainUnekoa = irudiakKargatu(UNEKO_TRAIN_PATH);
+		return vTrainUnekoa;
+	}
+	
+	public Vector<Irudia> getUnekoTest() throws IOException, MagickException{
+		if (vTestUnekoa == null)
+			vTestUnekoa = irudiakKargatu(UNEKO_TEST_PATH);
+		return vTestUnekoa;
+	}
+	
+	public Vector<Irudia> getUnekoAllIrudiak() throws IOException, MagickException {
+		if (vTrainUnekoa == null)
+			vTrainUnekoa = irudiakKargatu(UNEKO_TRAIN_PATH);
+		if (vTestUnekoa == null)
+			vTestUnekoa = irudiakKargatu(UNEKO_TEST_PATH);
+
+		Vector<Irudia> emaitza = new Vector<Irudia>(vTrainUnekoa);
+		emaitza.addAll(vTestUnekoa);
+		return emaitza;
+	}
 }

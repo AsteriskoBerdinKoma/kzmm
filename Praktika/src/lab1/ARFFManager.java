@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.util.Vector;
 
 public class ARFFManager {
@@ -29,11 +30,47 @@ public class ARFFManager {
 		return arff;
 	}
 
+	/**
+	 * @param filePath All diskretizatuaren fitxategia
+	 * @param trainKop Zenbat train argazki dauden
+	 * @return Train eta Test arff-ak diskretizatuta. 0 posizioan TrainD dago eta 1 posizioan TestD. 
+	 * @throws IOException
+	 */
 	public String[] separateDiscretized(String filePath, int trainKop)
 			throws IOException {
 		FileInputStream fi = new FileInputStream(filePath);
 		BufferedReader bri = new BufferedReader(new InputStreamReader(fi));
 
+		String train = "", test = "";
+
+		String lerroa;
+		while (!(lerroa = bri.readLine()).startsWith("\'\\\'")) {
+			train += lerroa + "\n";
+			test += lerroa + "\n";
+		}
+
+		for (int i = 0; i < trainKop; i++) {
+			train += lerroa + "\n";
+			lerroa = bri.readLine();
+		}
+
+		while (lerroa != null) {
+			test += lerroa + "\n";
+			lerroa = bri.readLine();
+		}
+		return new String[] { train, test };
+	}
+	
+	/**
+	 * @param filePath
+	 * @param trainKop
+	 * @return Train eta Test arff-ak diskretizatuta. 0 posizioan TrainD dago eta 1 posizioan TestD. 
+	 * @throws IOException
+	 */
+	public String[] separateDiscretizedData(String data, int trainKop)
+			throws IOException {
+		BufferedReader bri = new BufferedReader(new StringReader(data));
+		
 		String train = "", test = "";
 
 		String lerroa;
