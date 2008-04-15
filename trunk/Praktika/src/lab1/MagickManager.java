@@ -30,12 +30,12 @@ public class MagickManager {
 //			//System.out.println(1.1 + mi.getFileName() + " == " + info.getFileName());
 //			mi.writeImage(info);
 //			System.out.println(1.2);
-			try {
-				i.irudiaGorde("frogaScale");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				//i.irudiaGorde("frogaScale");
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		}
 	}
 
