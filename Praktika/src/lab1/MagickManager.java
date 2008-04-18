@@ -2,6 +2,7 @@ package lab1;
 
 import java.util.Vector;
 
+import magick.ColorspaceType;
 import magick.ImageMagick;
 import magick.MagickException;
 import magick.MagickImage;
@@ -46,7 +47,14 @@ public class MagickManager {
 			lag=iTrain.cloneImage(0, 0, false);
 			if(lag.normalizeImage())
 				trainIrudiak.addElement(lag);
+			lag=iTrain.cloneImage(0, 0, false);
+			lag.segmentImage(ColorspaceType.GRAYColorspace, 0.25, 1.5);
+			trainIrudiak.addElement(lag);
+			lag=iTrain.cloneImage(0, 0, false);
+			lag.solarizeImage(10);
+			trainIrudiak.addElement(lag);
 			
+			vTrainIrudiFiltroekin.addElement(trainIrudiak);
 		}
 	}
 	
