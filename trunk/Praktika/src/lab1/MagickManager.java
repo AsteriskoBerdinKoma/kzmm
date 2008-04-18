@@ -2,6 +2,7 @@ package lab1;
 
 import java.util.Vector;
 
+
 import magick.ColorspaceType;
 import magick.MagickException;
 import magick.MagickImage;
