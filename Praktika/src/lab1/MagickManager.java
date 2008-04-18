@@ -23,8 +23,8 @@ public class MagickManager {
 		Vector<MagickImage> testIrudiak = new Vector<MagickImage>();
 		
 		for(MagickImage iTrain: vTrainIrudiak){
-			trainIrudiak.addElement(iTrain.blurImage(3, 0.25));
-			trainIrudiak.addElement(iTrain.sharpenImage(3, 0.25));
+			trainIrudiak.addElement(iTrain.blurImage(0.25, 10));
+			trainIrudiak.addElement(iTrain.sharpenImage(0.25, 85));
 			MagickImage lag = iTrain.cloneImage(0, 0, false);
 			if(lag.thresholdImage(10))
 				trainIrudiak.addElement(lag);
