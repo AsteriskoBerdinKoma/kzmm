@@ -2,12 +2,15 @@ package lab1;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.StringBufferInputStream;
 import java.io.StringReader;
+import java.util.Enumeration;
+import java.util.Vector;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
@@ -17,8 +20,11 @@ import weka.filters.Filter;
 import weka.filters.supervised.attribute.Discretize;
 
 public class WekaManager {
+	
+	Vector<String> sailkatzaileak;
 
 	public WekaManager() {
+		sailkatzaileak = new Vector<String>();
 
 	}
 
@@ -124,6 +130,26 @@ public class WekaManager {
 		output = Filter.useFilter(input, filter);
 		return output.toString();
 	}
+	
+	public void discretizeUnsupervised(String allInputFilename, String allOutputFilename) throws Exception {
+		Instances inputAll;
+		Instances outputAll;
+		weka.filters.unsupervised.attribute.Discretize filter;
+
+		// load data (class attribute is assumed to be last attribute)
+		inputAll = load(allInputFilename);
+
+		// setup filter
+		filter = new weka.filters.unsupervised.attribute.Discretize();
+		filter.setInputFormat(inputAll);
+		filter.setBins(4); //Balio posibleak: 4, 6, 10 eta 20
+
+		// apply filter
+		outputAll = Filter.useFilter(inputAll, filter);
+
+		// save output
+		save(outputAll, allOutputFilename);
+	}
 
 	public void classify(String classifier, String[] options, Instances train,
 			Instances test) throws Exception {
@@ -137,8 +163,91 @@ public class WekaManager {
 		System.out.println(eval.toSummaryString("\nResults\n=======\n", false));
 	}
 
-	public void classify(String trainFile, String testFile) {
-		// TODO Auto-generated method stub
+	public String classify(String trainFile, String testFile) throws FileNotFoundException, IOException {
+		/*
+		 * Sarrerako ARFF fitxategiek beharrezkoa duten preprozesamendu
+		 * tratamendua eginda edukiko dute metodo hau deitzeko unean.
+		 */
+		
+		String emaitzak = "";
+		
+		//Entrenamenduko fitxategiaren instantzia
+		Instances trainDB = new Instances(new BufferedReader(new FileReader(
+				trainFile)));
+		trainDB.setClassIndex(trainDB.numAttributes() - 1);
+		
+		for (String sailka : sailkatzaileak) {
+			try {
+				String sailkIzena = sailka;
+				String[] sailkAukerak = null;
+				Classifier sailk = Classifier.forName(sailkIzena,sailkAukerak);
+				emaitzak +="SAILKATZAILEA: " + sailka;
+				emaitzak +="-------------------------------------------------------------\n";
 
+				//These classifiers take too much time to classify, so we skip them
+				if (sailka.equals("weka.classifiers.functions.MultilayerPerceptron") || 
+					sailka.equals("weka.classifiers.trees.NBTree") ||
+					sailka.equals("weka.classifiers.lazy.LBR") ||
+					sailka.equals("weka.classifiers.trees.UserClassifier")) {
+					// ...UserClassifier: prompts a panel to define the desired tree
+					// ...LBR: Takes too much time, but only with discretized ARFF files
+				} else {	
+					try {
+						sailk.buildClassifier(trainDB);
+						Instances testDB = new Instances(new BufferedReader(new FileReader(testFile)));
+						testDB.setClassIndex(testDB.numAttributes() - 1);
+						
+						Evaluation sailkatu = new Evaluation(trainDB);
+						sailkatu.evaluateModel(sailk, testDB);
+						emaitzak +=sailkatu.toSummaryString("\nResults\n=======\n", false);
+
+					} catch (Exception e) {
+						System.out.println("Errorea: ARFF desegokia!\n");
+						e.printStackTrace();
+					}
+				}
+			} catch (Exception e) {
+				System.out.println("Errorea: Ez da sailkatzailea!\n");
+				e.printStackTrace();
+				
+			}
+		}
+		return emaitzak;
+
+	}
+	
+	public void getSailkatzaileZerrenda() throws IOException{
+		Vector<String> s = new Vector<String>();
+		JarFile weka = new JarFile("./lib/weka.jar");
+		Enumeration<JarEntry> classes = weka.entries();
+		while (classes.hasMoreElements()) {
+			JarEntry elementua = classes.nextElement();
+			if (elementua.getName().startsWith("weka/classifiers/")
+					&& elementua.getName().endsWith(".class")) {
+				if (elementua.getName().lastIndexOf("/") > 16) {
+					String path = elementua.getName();
+					String path2 = path.replace("/", ".");
+					String path3 = path2.substring(0, path2.length() - 6);
+					if (path3.indexOf("$") != -1) {
+						if (!s.contains(path3.substring(0, path3.indexOf("$"))))
+							s.add(path3.substring(0, path3.indexOf("$")));
+					} else {
+						if (!s.contains(path3))
+							s.add(path3);
+					}
+				}
+			}
+		}
+		for (String sailka : s) {
+			try {
+				String sailkIzena = sailka;
+				String[] sailkAukerak = null;
+				Classifier.forName(sailkIzena,sailkAukerak);
+				sailkatzaileak.add(sailkIzena);
+			} catch (Exception e) {
+				//e.printStackTrace();
+			}
+			
+		}
 	}
 }
