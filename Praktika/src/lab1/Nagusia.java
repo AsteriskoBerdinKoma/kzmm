@@ -18,6 +18,7 @@ public class Nagusia {
 			IrudiManager irudiKud = new IrudiManager(pathTrainIrudiak, pathTestIrudiak);
 			ARFFManager arff = new ARFFManager();
 			WekaManager wekaKud = new WekaManager();
+			MagickManager magickKud = new MagickManager();
 			
 			Vector<Irudia> vTrain = irudiKud.getTrainOriginalak();
 			Vector<Irudia> vTest = irudiKud.getTestOriginalak();
@@ -43,6 +44,10 @@ public class Nagusia {
 			
 			wekaKud.classify("TRAIND.arff", "TESTD.arff");
 			//}
+			
+			magickKud.filtroaAplikatu(vTrain, vTest);
+			
+			
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
