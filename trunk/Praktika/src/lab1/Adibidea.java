@@ -1,8 +1,9 @@
 package lab1;
 
 import java.io.BufferedReader;
-import java.io.File;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Enumeration;
 import java.util.Vector;
 import java.util.jar.JarEntry;
@@ -11,15 +12,19 @@ import java.util.jar.JarFile;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.core.Instances;
-import weka.filters.Filter;
-import weka.filters.supervised.attribute.Discretize;
 
 public class Adibidea {
 
 	public static void main(String[] args) throws Exception {
+		
+		FileWriter fo1 = new FileWriter("NotClassifier.txt");
+		BufferedWriter bw1 = new BufferedWriter(fo1);
+		
+		FileWriter fo2 = new FileWriter("IncParamOrArff.txt");
+		BufferedWriter bw2 = new BufferedWriter(fo2);
 
 		// Entrenamenduko fitxategiaren instantzia
-		String train = "TRAIN.arff";
+		String train = "TRAIND.arff";
 		Instances trainDB = new Instances(new BufferedReader(new FileReader(
 				train)));
 		trainDB.setClassIndex(trainDB.numAttributes() - 1);
@@ -94,39 +99,49 @@ public class Adibidea {
 			}
 		}
 		for (String sailka : sailkatzaileak) {
-			System.out.println(sailka);
+			try {
+				String sailkIzena = sailka;
+				String[] sailkAukerak = null;
+				Classifier sailk = Classifier.forName(sailkIzena,sailkAukerak);
+				System.out.println("SAILKATZAILEA: " + sailka);
+				System.out.println("-------------------------------------------------------------");
+				if (sailka.equals("weka.classifiers.functions.MultilayerPerceptron") || 
+					sailka.equals("weka.classifiers.trees.NBTree") ||
+					sailka.equals("weka.classifiers.lazy.LBR")) {
+					// weka.classifiers.trees.UserClassifier sale un panel
+					// pidiendo elegir algo.
+					// weka.classifiers.lazy.LBR con discretized trilento
+					System.out.println("Errorea: Sailkatzaile oso exahustiboa!");
+				} else {	
+					try {
+						sailk.buildClassifier(trainDB);
+						String test = "TESTD.arff";
+						Instances testDB = new Instances(new BufferedReader(new FileReader(test)));
+						testDB.setClassIndex(testDB.numAttributes() - 1);
+						
+						Evaluation sailkatu = new Evaluation(trainDB);
+						sailkatu.evaluateModel(sailk, testDB);
+						System.out.println(sailkatu.toSummaryString("\nResults\n=======\n", false));
 
-//			 // Instantzia ikasteko
-//			 String sailkIzena = sailka;
-//			 String[] sailkAukerak = null;
-//			 if (Classifier.forName(sailkIzena, sailkAukerak) != null) {
-//			 Classifier sailk = Classifier.forName(sailkIzena, sailkAukerak);
-//			 // sailk.buildClassifier(trainDBdiscretized);
-//			 sailk.buildClassifier(trainDB);
-//			
-//			 // Testerako datubasea finkatu (Ez dago diskretizatuta horrela
-//			 // ezin da
-//			 // egin!!)
-//			 String test = "TEST.arff";
-//			 Instances testDB = new Instances(new BufferedReader(
-//			 new FileReader(test)));
-//			 testDB.setClassIndex(testDB.numAttributes() - 1);
-//			
-//			 //
-//			 // Evaluation sailkatu = new Evaluation(trainDBdiscretized);
-//			 Evaluation sailkatu = new Evaluation(trainDB);
-//			 sailkatu.evaluateModel(sailk, testDB); // sailkatu testeko
-//			 // DBarekin
-//			 // emaitzen laburpen bat atera
-//			 System.out.println(sailkatu.toSummaryString(
-//			 "\nResults\n=======\n", false));
-//			 System.out.println(sailkatu.pctCorrect()); // porcentaje bien
-//			 // clasificado
-//			 System.out.println(sailkatu.pctIncorrect()); // porcentaje
-//			 // mal
-//			 // clasificado
-//			 }
-
+					} catch (Exception e) {
+						System.out.println("");
+						System.out.println("Errorea: ARFF desegokia!");
+						// e.printStackTrace();
+						System.out.println("");
+						bw2.write(sailka+"\n");
+						bw2.write(e.toString());
+					}
+				}
+			} catch (Exception e) {
+				//System.out.println("");
+				//System.out.println("Errorea: Ez da sailkatzailea!");
+				// e.printStackTrace();
+				//System.out.println("");
+				bw1.write(sailka+"\n");
+				
+			}
 		}
+		bw1.close();
+		bw2.close();
 	}
 }
