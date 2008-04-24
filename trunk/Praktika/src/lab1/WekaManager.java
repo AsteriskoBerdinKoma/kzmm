@@ -100,7 +100,6 @@ public class WekaManager {
 
 		// load data (class attribute is assumed to be last attribute)
 		inputAll = load(allInputFilename);
-		;
 
 		// setup filter
 		filter = new Discretize();
@@ -120,7 +119,6 @@ public class WekaManager {
 
 		// load data (class attribute is assumed to be last attribute)
 		input = loadData(data);
-		;
 
 		// setup filter
 		filter = new Discretize();
