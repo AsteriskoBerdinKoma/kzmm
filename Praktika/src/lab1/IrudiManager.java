@@ -23,12 +23,16 @@ public class IrudiManager {
 	
 	private Vector<Irudia> vTrainUnekoa;
 	private Vector<Irudia> vTestUnekoa;
+	
+	private final MagickManager magickKud;
 
-	public IrudiManager(String pathTrain, String pathTest) {
+	public IrudiManager(String pathTrain, String pathTest) throws MagickException, IOException {
 		IrudiManager.PATH_TRAIN = pathTrain;
 		IrudiManager.PATH_TEST = pathTest;
 		IrudiManager.UNEKO_TRAIN_PATH = pathTrain;
 		IrudiManager.UNEKO_TEST_PATH = pathTest;
+		magickKud = new MagickManager();
+		//magickKud.filtroaAplikatu(this.getTrainOriginalak(), this.getTestOriginalak());
 	}
 
 	private Vector<Irudia> irudiakKargatu(String path) throws IOException,
@@ -87,5 +91,23 @@ public class IrudiManager {
 		Vector<Irudia> emaitza = new Vector<Irudia>(vTrainUnekoa);
 		emaitza.addAll(vTestUnekoa);
 		return emaitza;
+	}
+	
+	public boolean next() throws MagickException, IOException{
+		boolean b = magickKud.next();
+		UNEKO_TRAIN_PATH = magickKud.getUnekoTrainPath();
+		UNEKO_TEST_PATH = magickKud.getUnekoTestPath();
+		return b;
+	}
+	
+	public String getUnekoInfo(){
+		String filtro = magickKud.getUnekoFiltroa();
+		String atributuak = magickKud.getUnekoAtributuak();
+		
+		return "Filtroa: " + filtro + "\nAtributuak:\n\t" + atributuak;
+	}
+	
+	public String getUnekoFiltroa(){
+		return magickKud.getUnekoFiltroa();
 	}
 }

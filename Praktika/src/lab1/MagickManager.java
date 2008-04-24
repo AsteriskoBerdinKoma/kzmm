@@ -1,20 +1,37 @@
 package lab1;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Vector;
 
-
 import magick.ColorspaceType;
+import magick.CompressionType;
+import magick.ImageInfo;
 import magick.MagickException;
 import magick.MagickImage;
 import magick.NoiseType;
 
 public class MagickManager {
 
-	private Vector<MagickImages> vTrainIrudiFiltroekin;	
+	private Vector<MagickImages> vTrainIrudiFiltroekin;
+
 	private int kontTrain;
 
 	private Vector<MagickImages> vTestIrudiFiltroekin;
+
 	private int kontTest;
+
+	private MagickImages unekoTrains;
+
+	private MagickImages unekoTests;
+
+	private String unekoFiltroa;
+
+	private String unekoAtrib;
+
+	private String unekoTrainPath;
+
+	private String unekoTestPath;
 
 	public MagickManager() {
 		vTrainIrudiFiltroekin = new Vector<MagickImages>();
@@ -31,7 +48,8 @@ public class MagickManager {
 		return irudiak;
 	}
 
-	private MagickImages sharpen(Vector<Irudia> vIrudiak) throws MagickException {
+	private MagickImages sharpen(Vector<Irudia> vIrudiak)
+			throws MagickException {
 		MagickImages irudiak = new MagickImages("Sharpen");
 		irudiak.setAtributuak("radius: 0.25, sigma: 85");
 		for (MagickImage irudia : vIrudiak)
@@ -123,8 +141,9 @@ public class MagickManager {
 		}
 		return irudiak;
 	}
-	
-	private MagickImages negative(Vector<Irudia> vIrudiak) throws MagickException {
+
+	private MagickImages negative(Vector<Irudia> vIrudiak)
+			throws MagickException {
 		MagickImages irudiak = new MagickImages("Negative");
 		irudiak.setAtributuak("grayscale: 1");
 		MagickImage lag;
@@ -135,10 +154,11 @@ public class MagickManager {
 		}
 		return irudiak;
 	}
-	
-	private MagickImages normalize(Vector<Irudia> vIrudiak) throws MagickException {
+
+	private MagickImages normalize(Vector<Irudia> vIrudiak)
+			throws MagickException {
 		MagickImages irudiak = new MagickImages("Normalize");
-		//irudiak.setAtributuak("");
+		// irudiak.setAtributuak("");
 		MagickImage lag;
 		for (MagickImage irudia : vIrudiak) {
 			lag = irudia.cloneImage(0, 0, false);
@@ -147,10 +167,12 @@ public class MagickManager {
 		}
 		return irudiak;
 	}
-	
-	private MagickImages segment(Vector<Irudia> vIrudiak) throws MagickException {
+
+	private MagickImages segment(Vector<Irudia> vIrudiak)
+			throws MagickException {
 		MagickImages irudiak = new MagickImages("Segment");
-		irudiak.setAtributuak("colorspace: GRAY Colorspace, cluster threshold: 0,25, smoothing threshold: 1,5");
+		irudiak
+				.setAtributuak("colorspace: GRAY Colorspace, cluster threshold: 0,25, smoothing threshold: 1,5");
 		MagickImage lag;
 		for (MagickImage irudia : vIrudiak) {
 			lag = irudia.cloneImage(0, 0, false);
@@ -159,8 +181,9 @@ public class MagickManager {
 		}
 		return irudiak;
 	}
-	
-	private MagickImages solarize(Vector<Irudia> vIrudiak) throws MagickException {
+
+	private MagickImages solarize(Vector<Irudia> vIrudiak)
+			throws MagickException {
 		MagickImages irudiak = new MagickImages("Solarize");
 		irudiak.setAtributuak("threshold: 10");
 		MagickImage lag;
@@ -171,7 +194,6 @@ public class MagickManager {
 		}
 		return irudiak;
 	}
-	
 
 	public void filtroaAplikatu(Vector<Irudia> vTrainIrudiak,
 			Vector<Irudia> vTestIrudiak) throws MagickException {
@@ -183,109 +205,108 @@ public class MagickManager {
 
 		vTrainIrudiFiltroekin.addElement(blur(vTrainIrudiak));
 		vTestIrudiFiltroekin.addElement(blur(vTestIrudiak));
-		
+
 		vTrainIrudiFiltroekin.addElement(sharpen(vTrainIrudiak));
 		vTestIrudiFiltroekin.addElement(sharpen(vTestIrudiak));
-		
+
 		vTrainIrudiFiltroekin.addElement(threshold(vTrainIrudiak));
 		vTestIrudiFiltroekin.addElement(threshold(vTestIrudiak));
-		
+
 		vTrainIrudiFiltroekin.addElement(addNoise(vTrainIrudiak));
 		vTestIrudiFiltroekin.addElement(addNoise(vTestIrudiak));
-		
+
 		vTrainIrudiFiltroekin.addElement(charcoal(vTrainIrudiak));
 		vTestIrudiFiltroekin.addElement(charcoal(vTestIrudiak));
-		
+
 		vTrainIrudiFiltroekin.addElement(contrast(vTrainIrudiak));
 		vTestIrudiFiltroekin.addElement(contrast(vTestIrudiak));
-		
+
 		vTrainIrudiFiltroekin.addElement(edge(vTrainIrudiak));
 		vTestIrudiFiltroekin.addElement(edge(vTestIrudiak));
-		
+
 		vTrainIrudiFiltroekin.addElement(emboss(vTrainIrudiak));
 		vTestIrudiFiltroekin.addElement(emboss(vTestIrudiak));
-		
+
 		vTrainIrudiFiltroekin.addElement(equalize(vTrainIrudiak));
 		vTestIrudiFiltroekin.addElement(equalize(vTestIrudiak));
-		
+
 		vTrainIrudiFiltroekin.addElement(level(vTrainIrudiak));
 		vTestIrudiFiltroekin.addElement(level(vTestIrudiak));
-		
+
 		vTrainIrudiFiltroekin.addElement(negative(vTrainIrudiak));
 		vTestIrudiFiltroekin.addElement(negative(vTestIrudiak));
-		
+
 		vTrainIrudiFiltroekin.addElement(normalize(vTrainIrudiak));
 		vTestIrudiFiltroekin.addElement(normalize(vTestIrudiak));
-		
+
 		vTrainIrudiFiltroekin.addElement(segment(vTrainIrudiak));
 		vTestIrudiFiltroekin.addElement(segment(vTestIrudiak));
-		
+
 		vTrainIrudiFiltroekin.addElement(solarize(vTrainIrudiak));
 		vTestIrudiFiltroekin.addElement(solarize(vTestIrudiak));
 
-
-//		for (MagickImage iTest : vTestIrudiak) {
-//			// Blur
-//			testIrudiak.addElement(iTest.blurImage(0.25, 10));
-//
-//			// Sharpen
-//			testIrudiak.addElement(iTest.sharpenImage(0.25, 85));
-//
-//			// Threshold
-//			lag = iTest.cloneImage(0, 0, false);
-//			if (lag.thresholdImage(10))
-//				testIrudiak.addElement(lag);
-//
-//			// Add Noise
-//			testIrudiak
-//					.addElement(iTest.addNoiseImage(NoiseType.GaussianNoise));
-//
-//			// Charcoal
-//			testIrudiak.addElement(iTest.charcoalImage(4, 1));
-//
-//			// Contrast
-//			lag = iTest.cloneImage(0, 0, false);
-//			if (lag.contrastImage(true))
-//				testIrudiak.addElement(lag);
-//
-//			// Edge
-//			testIrudiak.addElement(iTest.edgeImage(3));
-//
-//			// Emboss
-//			testIrudiak.addElement(iTest.embossImage(3, 0.25));
-//
-//			// Equalize
-//			lag = iTest.cloneImage(0, 0, false);
-//			if (lag.equalizeImage())
-//				testIrudiak.addElement(lag);
-//
-//			// Level
-//			lag = iTest.cloneImage(0, 0, false);
-//			if (lag.levelImage("black"))
-//				testIrudiak.addElement(lag);
-//
-//			// Negative
-//			lag = iTest.cloneImage(0, 0, false);
-//			if (lag.negateImage(1))
-//				testIrudiak.addElement(lag);
-//
-//			// Normalize
-//			lag = iTest.cloneImage(0, 0, false);
-//			if (lag.normalizeImage())
-//				testIrudiak.addElement(lag);
-//
-//			// Segment
-//			lag = iTest.cloneImage(0, 0, false);
-//			lag.segmentImage(ColorspaceType.GRAYColorspace, 0.25, 1.5);
-//			testIrudiak.addElement(lag);
-//
-//			// Solarize
-//			lag = iTest.cloneImage(0, 0, false);
-//			lag.solarizeImage(10);
-//			testIrudiak.addElement(lag);
-//
-//			vTestIrudiFiltroekin.addElement(testIrudiak);
-//		}
+		// for (MagickImage iTest : vTestIrudiak) {
+		// // Blur
+		// testIrudiak.addElement(iTest.blurImage(0.25, 10));
+		//
+		// // Sharpen
+		// testIrudiak.addElement(iTest.sharpenImage(0.25, 85));
+		//
+		// // Threshold
+		// lag = iTest.cloneImage(0, 0, false);
+		// if (lag.thresholdImage(10))
+		// testIrudiak.addElement(lag);
+		//
+		// // Add Noise
+		// testIrudiak
+		// .addElement(iTest.addNoiseImage(NoiseType.GaussianNoise));
+		//
+		// // Charcoal
+		// testIrudiak.addElement(iTest.charcoalImage(4, 1));
+		//
+		// // Contrast
+		// lag = iTest.cloneImage(0, 0, false);
+		// if (lag.contrastImage(true))
+		// testIrudiak.addElement(lag);
+		//
+		// // Edge
+		// testIrudiak.addElement(iTest.edgeImage(3));
+		//
+		// // Emboss
+		// testIrudiak.addElement(iTest.embossImage(3, 0.25));
+		//
+		// // Equalize
+		// lag = iTest.cloneImage(0, 0, false);
+		// if (lag.equalizeImage())
+		// testIrudiak.addElement(lag);
+		//
+		// // Level
+		// lag = iTest.cloneImage(0, 0, false);
+		// if (lag.levelImage("black"))
+		// testIrudiak.addElement(lag);
+		//
+		// // Negative
+		// lag = iTest.cloneImage(0, 0, false);
+		// if (lag.negateImage(1))
+		// testIrudiak.addElement(lag);
+		//
+		// // Normalize
+		// lag = iTest.cloneImage(0, 0, false);
+		// if (lag.normalizeImage())
+		// testIrudiak.addElement(lag);
+		//
+		// // Segment
+		// lag = iTest.cloneImage(0, 0, false);
+		// lag.segmentImage(ColorspaceType.GRAYColorspace, 0.25, 1.5);
+		// testIrudiak.addElement(lag);
+		//
+		// // Solarize
+		// lag = iTest.cloneImage(0, 0, false);
+		// lag.solarizeImage(10);
+		// testIrudiak.addElement(lag);
+		//
+		// vTestIrudiFiltroekin.addElement(testIrudiak);
+		// }
 	}
 
 	public void scale(Vector<Irudia> ir) throws MagickException {
@@ -296,21 +317,21 @@ public class MagickManager {
 		// bigger.setFileName("froga/bigger.pgm");
 		// bigger.writeImage(info);
 
-//		for (Irudia i : ir) {
-//			// ImageInfo info = new ImageInfo();
-//			// MagickImage mi = i.scaleImage(2000, 900);
-//			// mi.setFileName("frogaScale/"+ i.getFitxIzen());
-//			// //System.out.println(1.1 + mi.getFileName() + " == " +
-//			// info.getFileName());
-//			// mi.writeImage(info);
-//			// System.out.println(1.2);
-//			// try {
-//			// //i.irudiaGorde("frogaScale");
-//			// } catch (IOException e) {
-//			// // TODO Auto-generated catch block
-//			// e.printStackTrace();
-//			// }
-//		}
+		// for (Irudia i : ir) {
+		// // ImageInfo info = new ImageInfo();
+		// // MagickImage mi = i.scaleImage(2000, 900);
+		// // mi.setFileName("frogaScale/"+ i.getFitxIzen());
+		// // //System.out.println(1.1 + mi.getFileName() + " == " +
+		// // info.getFileName());
+		// // mi.writeImage(info);
+		// // System.out.println(1.2);
+		// // try {
+		// // i.irudiaGorde("frogaScale");
+		// // } catch (IOException e) {
+		// // // TODO Auto-generated catch block
+		// // e.printStackTrace();
+		// // }
+		// }
 	}
 
 	private class MagickImages extends Vector<MagickImage> {
@@ -348,5 +369,123 @@ public class MagickManager {
 
 	public Vector<MagickImages> getVTrainIrudiFiltroekin() {
 		return vTrainIrudiFiltroekin;
+	}
+
+	public boolean next() throws MagickException, IOException {
+		if (kontTrain < vTrainIrudiFiltroekin.size()
+				&& kontTest < vTestIrudiFiltroekin.size()) {
+			unekoTrains = vTrainIrudiFiltroekin.elementAt(kontTrain);
+			kontTrain++;
+			unekoTests = vTestIrudiFiltroekin.elementAt(kontTest);
+			kontTest++;
+			unekoFiltroa = unekoTrains.getFiltroa();
+			unekoAtrib = unekoTrains.getAtributuak();
+			unekoTrainPath = "irudiak" + File.separator + unekoFiltroa
+					+ File.separator + "train";
+			unekoTestPath = "irudiak" + File.separator + unekoFiltroa
+					+ File.separator + "test";
+
+			for (MagickImage imageTrain : unekoTrains)
+				irudiaGorde(imageTrain, this.unekoTrainPath);
+
+			for (MagickImage imageTest : unekoTests)
+				irudiaGorde(imageTest, this.unekoTestPath);
+
+			return true;
+		} else {
+			unekoTrains = null;
+			unekoTests = null;
+			unekoFiltroa = null;
+			unekoAtrib = null;
+			unekoTrainPath = "";
+			unekoTestPath = "";
+			return false;
+		}
+
+	}
+
+	public boolean hasMoreElements() {
+		return (kontTrain < vTrainIrudiFiltroekin.size() && kontTest < vTestIrudiFiltroekin
+				.size());
+	}
+
+	public void reset() {
+		unekoTrains = null;
+		kontTrain = 0;
+		unekoTests = null;
+		kontTest = 0;
+		unekoFiltroa = null;
+		unekoAtrib = null;
+	}
+
+	public String getUnekoFiltroa() {
+		return unekoFiltroa;
+	}
+
+	public String getUnekoAtributuak() {
+		return unekoAtrib;
+	}
+
+	// public Vector<Irudia> getUnekoTrain() throws MagickException, IOException
+	// {
+	// Vector<Irudia> irudiak = new Vector<Irudia>();
+	//		
+	// for (MagickImage image : unekoTrains)
+	// irudiak.addElement(irudiaGorde(image, this.unekoTrainPath));
+	//
+	// return irudiak;
+	// }
+	//
+	// public Vector<Irudia> getUnekoTest() throws MagickException, IOException
+	// {
+	// Vector<Irudia> irudiak = new Vector<Irudia>();
+	//		
+	// for (MagickImage image : unekoTests)
+	// irudiak.addElement(irudiaGorde(image, this.unekoTestPath));
+	//
+	// return irudiak;
+	// }
+
+	private Irudia irudiaGorde(MagickImage irudia, String path)
+			throws MagickException, IOException {
+
+		File f = new File(path);
+		// Irudi zaharrak ezabatu eta karpeta berria sortu
+		deleteDirectory(f);
+		f.mkdirs();
+
+		// Irudiaren fitxategiaren izena lortu
+		String[] s = irudia.getFileName().split(File.separator);
+		String fitxIzen = s[s.length - 1];
+
+		String pathOsoa = path + File.separator + fitxIzen;
+		irudia.setCompression(CompressionType.NoCompression);
+		ImageInfo info = new ImageInfo(pathOsoa);
+		irudia.setFileName(pathOsoa);
+		irudia.writeImage(info);
+
+		return new Irudia(new ImageInfo(pathOsoa));
+	}
+
+	private boolean deleteDirectory(File path) {
+		if (path.exists()) {
+			File[] files = path.listFiles();
+			for (int i = 0; i < files.length; i++) {
+				if (files[i].isDirectory()) {
+					deleteDirectory(files[i]);
+				} else {
+					files[i].delete();
+				}
+			}
+		}
+		return (path.delete());
+	}
+
+	public String getUnekoTestPath() {
+		return unekoTestPath;
+	}
+
+	public String getUnekoTrainPath() {
+		return unekoTrainPath;
 	}
 }

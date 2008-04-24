@@ -23,17 +23,24 @@ public class ARFFManager {
 		arff += "@ATTRIBUTE KLASEA {BAI, EZ}\n";
 		arff += "@DATA\n";
 
+		System.out.println("Kopurua: " + vIrudiak.size());
 		for (Irudia irudi : vIrudiak) {
+			System.out.println(irudi.getFitxIzen());
 			if (irudi.getPixelKop() == pixelKop)
 				arff += irudi.getDatuak() + "\n";
 		}
+
+		System.out.println("String length: " + arff.length());
 		return arff;
 	}
 
 	/**
-	 * @param filePath All diskretizatuaren fitxategia
-	 * @param trainKop Zenbat train argazki dauden
-	 * @return Train eta Test arff-ak diskretizatuta. 0 posizioan TrainD dago eta 1 posizioan TestD. 
+	 * @param filePath
+	 *            All diskretizatuaren fitxategia
+	 * @param trainKop
+	 *            Zenbat train argazki dauden
+	 * @return Train eta Test arff-ak diskretizatuta. 0 posizioan TrainD dago
+	 *         eta 1 posizioan TestD.
 	 * @throws IOException
 	 */
 	public String[] separateDiscretized(String filePath, int trainKop)
@@ -60,17 +67,18 @@ public class ARFFManager {
 		}
 		return new String[] { train, test };
 	}
-	
+
 	/**
 	 * @param filePath
 	 * @param trainKop
-	 * @return Train eta Test arff-ak diskretizatuta. 0 posizioan TrainD dago eta 1 posizioan TestD. 
+	 * @return Train eta Test arff-ak diskretizatuta. 0 posizioan TrainD dago
+	 *         eta 1 posizioan TestD.
 	 * @throws IOException
 	 */
 	public String[] separateDiscretizedData(String data, int trainKop)
 			throws IOException {
 		BufferedReader bri = new BufferedReader(new StringReader(data));
-		
+
 		String train = "", test = "";
 
 		String lerroa;

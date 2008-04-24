@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Vector;
 
-import magick.CompressionType;
 import magick.ImageInfo;
 import magick.MagickException;
 import magick.MagickImage;
@@ -107,13 +106,13 @@ public class Irudia extends MagickImage {
 		fitxIrakurri(this.path);
 	}
 
-	/**
-	 * @param filePath
-	 *            fitxategiaren bidea <U>fitxategiaren izena gabe</U>. Izena,
-	 *            fitxategi originalarena izango da.
-	 * @throws IOException
-	 * @throws MagickException
-	 */
+//	/**
+//	 * @param filePath
+//	 *            fitxategiaren bidea <U>fitxategiaren izena gabe</U>. Izena,
+//	 *            fitxategi originalarena izango da.
+//	 * @throws IOException
+//	 * @throws MagickException
+//	 */
 //	public void irudiaGorde(String filePath) throws IOException,
 //			MagickException {
 //		this.path = filePath + File.separator + fitxIzen;
