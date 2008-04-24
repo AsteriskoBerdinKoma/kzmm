@@ -201,7 +201,7 @@ public class Lab1 {
 			train.setClassIndex(train.numAttributes() -1);
 			test.setClassIndex(test.numAttributes() -1);
 			
-			wm.classify("NaiveBayes", null, train, test);
+			//wm.classify("NaiveBayes", null, train, test);
 			
 		} catch (IOException e) {
 			// TODO Bloque catch generado automticamente

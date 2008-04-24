@@ -14,7 +14,6 @@ import java.util.jar.JarFile;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
-import weka.classifiers.bayes.NaiveBayes;
 import weka.core.Instances;
 import weka.filters.Filter;
 import weka.filters.supervised.attribute.Discretize;
@@ -23,9 +22,9 @@ public class WekaManager {
 	
 	Vector<String> sailkatzaileak;
 
-	public WekaManager() {
+	public WekaManager() throws IOException {
 		sailkatzaileak = new Vector<String>();
-
+		this.getSailkatzaileZerrenda();
 	}
 
 	protected static Instances load(String filename) throws Exception {
@@ -149,17 +148,17 @@ public class WekaManager {
 		save(outputAll, allOutputFilename);
 	}
 
-	public void classify(String classifier, String[] options, Instances train,
-			Instances test) throws Exception {
-		// train classifier
-		// Classifier cls = Classifier.forName(classifier, options);
-		Classifier cls = new NaiveBayes();
-		cls.buildClassifier(train);
-		// evaluate classifier and print some statistics
-		Evaluation eval = new Evaluation(train);
-		eval.evaluateModel(cls, test);
-		System.out.println(eval.toSummaryString("\nResults\n=======\n", false));
-	}
+//	public void classify(String classifier, String[] options, Instances train,
+//			Instances test) throws Exception {
+//		// train classifier
+//		// Classifier cls = Classifier.forName(classifier, options);
+//		Classifier cls = new NaiveBayes();
+//		cls.buildClassifier(train);
+//		// evaluate classifier and print some statistics
+//		Evaluation eval = new Evaluation(train);
+//		eval.evaluateModel(cls, test);
+//		System.out.println(eval.toSummaryString("\nResults\n=======\n", false));
+//	}
 
 	public String classify(String trainFile, String testFile) throws FileNotFoundException, IOException {
 		/*
