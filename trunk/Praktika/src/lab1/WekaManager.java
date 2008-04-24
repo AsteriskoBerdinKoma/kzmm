@@ -15,6 +15,8 @@ import java.util.jar.JarFile;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.core.Instances;
+import weka.core.UnsupportedAttributeTypeException;
+import weka.core.UnsupportedClassTypeException;
 import weka.filters.Filter;
 import weka.filters.supervised.attribute.Discretize;
 
@@ -178,8 +180,6 @@ public class WekaManager {
 				String sailkIzena = sailka;
 				String[] sailkAukerak = null;
 				Classifier sailk = Classifier.forName(sailkIzena,sailkAukerak);
-				emaitzak +="SAILKATZAILEA: " + sailka;
-				emaitzak +="-------------------------------------------------------------\n";
 
 				//These classifiers take too much time to classify, so we skip them
 				if (sailka.equals("weka.classifiers.functions.MultilayerPerceptron") || 
@@ -196,11 +196,20 @@ public class WekaManager {
 						
 						Evaluation sailkatu = new Evaluation(trainDB);
 						sailkatu.evaluateModel(sailk, testDB);
+						emaitzak +="\n\n";
+						emaitzak +="SAILKATZAILEA: " + sailka+"\n";
+						emaitzak +="------------------------------------------------------------------\n";
 						emaitzak +=sailkatu.toSummaryString("\nResults\n=======\n", false);
 
-					} catch (Exception e) {
-						System.out.println("Errorea: ARFF desegokia!\n");
-						e.printStackTrace();
+					} catch (UnsupportedClassTypeException e) {
+						//System.out.println("Errorea: KLASE atributu mota desegokia!\n");
+						//e.printStackTrace();
+					} catch (UnsupportedAttributeTypeException e) {
+						//System.out.println("Errorea: INSTANTZIA atributu mota desegokiak!\n");
+						//e.printStackTrace();
+					} catch (Exception e){
+						//System.out.println("Errorea: ARFF desegokia!\n");
+						//e.printStackTrace();
 					}
 				}
 			} catch (Exception e) {
