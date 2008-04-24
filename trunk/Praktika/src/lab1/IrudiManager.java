@@ -32,7 +32,7 @@ public class IrudiManager {
 		IrudiManager.UNEKO_TRAIN_PATH = pathTrain;
 		IrudiManager.UNEKO_TEST_PATH = pathTest;
 		magickKud = new MagickManager();
-		//magickKud.filtroaAplikatu(this.getTrainOriginalak(), this.getTestOriginalak());
+		magickKud.filtroaAplikatu(this.getTrainOriginalak(), this.getTestOriginalak());
 	}
 
 	private Vector<Irudia> irudiakKargatu(String path) throws IOException,

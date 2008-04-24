@@ -46,71 +46,86 @@ public class Nagusia {
 
 			arff.toARFF(vAll, "ALL.arff");
 			wekaKud.discretize("ALL.arff", "ALLD.arff");
-			arff.separateDiscretized("ALLD.arff", "TRAIND.arff", "TESTD.arff", new File(pathTrainIrudiak).list().length);
+			arff.separateDiscretized("ALLD.arff", "TRAIND.arff", "TESTD.arff",
+					new File(pathTrainIrudiak).list().length);
 
-//			BufferedWriter bwTrainD = new BufferedWriter(new FileWriter(
-//					"TRAIND.arff"));
-//			bwTrainD.write(trainDtestD[0]);
-//
-//			BufferedWriter bwTestD = new BufferedWriter(new FileWriter(
-//					"TESTD.arff"));
-//			bwTestD.write(trainDtestD[1]);
-
-//			emaitza = wekaKud.classify("TRAIN.arff", "TEST.arff");
-//			bwEmaitza = new BufferedWriter(new FileWriter(
-//					"irud_orig-not_discretized.txt"));
-//			bwEmaitza.write("IRUDI ORIGINALAK - DISCRETIZATU GABE\n-------------------------------------\n\n");
-//			bwEmaitza.write(emaitza);
-//			bwEmaitza.close();
-
-			emaitzaD = wekaKud.classify("TRAIND.arff", "TESTD.arff");
-			bwEmaitzaD = new BufferedWriter(new FileWriter(
-					"irud_orig-discretized.txt"));
-			bwEmaitzaD.write("IRUDI ORIGINALAK - DISCRETIZATUTA\n-------------------------------------\n\n");
-			bwEmaitzaD.write(emaitzaD);
-			bwEmaitzaD.close();
-
-			// //FILTROEKIN
-			// while (irudiKud.next()){
-			// vTrain = irudiKud.getUnekoTrain();
-			// vTest = irudiKud.getUnekoTest();
-			// vAll = irudiKud.getUnekoAllIrudiak();
-			//				
-			// bwTrain.write(arff.toARFF(vTrain));
-			// bwTest.write(arff.toARFF(vTest));
-			//				
-			// allD = wekaKud.discretize(arff.toARFF(vAll));
-			// trainDtestD = arff.separateDiscretizedData(allD, new
-			// File(pathTrainIrudiak).list().length);
-			//				
+			// BufferedWriter bwTrainD = new BufferedWriter(new FileWriter(
+			// "TRAIND.arff"));
 			// bwTrainD.write(trainDtestD[0]);
+			//
+			// BufferedWriter bwTestD = new BufferedWriter(new FileWriter(
+			// "TESTD.arff"));
 			// bwTestD.write(trainDtestD[1]);
-			//				
-			// emaitza = wekaKud.classify("TRAIN.arff", "TEST.arff");
+
+//			 emaitza = wekaKud.classify("TRAIN.arff", "TEST.arff");
+//			 bwEmaitza = new BufferedWriter(new FileWriter("irud_orig-not_discretized.txt"));
+//			 bwEmaitza.write("IRUDI ORIGINALAK - DISCRETIZATU GABE\n-------------------------------------\n\n");
+//			 bwEmaitza.write(emaitza);
+//			 bwEmaitza.close();
+
 			// emaitzaD = wekaKud.classify("TRAIND.arff", "TESTD.arff");
-			//				
-			// String unekoFiltro = irudiKud.getUnekoFiltroa();
-			// emaitza = unekoFiltro +" - DISCRETIZATU
-			// GABE\n-------------------------------------\n\n" +
-			// irudiKud.getUnekoInfo() + "\n\n" + emaitza;
-			// bwEmaitza = new BufferedWriter(new FileWriter(unekoFiltro +
-			// "-not_discretized.txt"));
-			// bwEmaitza.write(emaitza);
-			// bwEmaitza.close();
-			//				
-			// emaitzaD = unekoFiltro + " -
-			// DISCRETIZATUTA\n-------------------------------------\n\n" +
-			// irudiKud.getUnekoInfo() + "\n\n" + emaitza;
-			// bwEmaitzaD = new BufferedWriter(new FileWriter(unekoFiltro +
-			// "-discretized.txt"));
+			// bwEmaitzaD = new BufferedWriter(new FileWriter(
+			// "irud_orig-discretized.txt"));
+			// bwEmaitzaD.write("IRUDI ORIGINALAK -
+			// DISCRETIZATUTA\n-------------------------------------\n\n");
 			// bwEmaitzaD.write(emaitzaD);
 			// bwEmaitzaD.close();
-			// }
+
+			File f1 = new File("TRAIN.arff");
+			File f2 = new File("TEST.arff");
+			File f3 = new File("ALL.arff");
+			File f4 = new File("TRAIND.arff");
+			File f5 = new File("TESTD.arff");
+			File f6 = new File("ALLD.arff");
+			
+			// FILTROEKIN
+			while (irudiKud.next()) {	
+				f1.delete();
+				f2.delete();
+				f3.delete();
+				f4.delete();
+				f5.delete();
+				f6.delete();
+				
+				vTrain = irudiKud.getUnekoTrain();
+				vTest = irudiKud.getUnekoTest();
+				vAll = irudiKud.getUnekoAllIrudiak();
+
+				arff.toARFF(vTrain, "TRAIN.arff");
+				arff.toARFF(vTest, "TEST.arff");
+
+				arff.toARFF(vAll, "ALL.arff");
+				wekaKud.discretize("ALL.arff", "ALLD.arff");
+				arff.separateDiscretized("ALLD.arff", "TRAIND.arff",
+						"TESTD.arff", new File(pathTrainIrudiak).list().length);
+
+				String unekoFiltro = irudiKud.getUnekoFiltroa();
+
+				emaitza = wekaKud.classify("TRAIN.arff", "TEST.arff");
+				bwEmaitza = new BufferedWriter(new FileWriter(unekoFiltro
+						+ "-not_discretized.txt"));
+				bwEmaitza
+						.write(unekoFiltro
+								+ " - DISCRETIZATU GABE\n-------------------------------------\n\n");
+				bwEmaitza.write(irudiKud.getUnekoInfo() + "\n\n" + emaitza);
+				bwEmaitza.write(emaitza);
+				bwEmaitza.close();
+
+//				emaitzaD = wekaKud.classify("TRAIND.arff", "TESTD.arff");
+//				bwEmaitzaD = new BufferedWriter(new FileWriter(unekoFiltro
+//						+ "-discretized.txt"));
+//				bwEmaitzaD
+//						.write(unekoFiltro
+//								+ " - DISCRETIZATUTA\n-------------------------------------\n\n");
+//				bwEmaitzaD.write(irudiKud.getUnekoInfo() + "\n\n" + emaitza);
+//				bwEmaitzaD.write(emaitzaD);
+//				bwEmaitzaD.close();
+			}
 
 			// bwTrain.close();
 			// bwTest.close();
-//			bwTrainD.close();
-//			bwTestD.close();
+			// bwTrainD.close();
+			// bwTestD.close();
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

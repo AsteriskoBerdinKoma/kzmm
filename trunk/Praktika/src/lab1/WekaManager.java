@@ -173,7 +173,6 @@ public class WekaManager {
 				trainFile)));
 		trainDB.setClassIndex(trainDB.numAttributes() - 1);
 		
-		System.out.println(sailkatzaileak.size());
 		for (String sailka : sailkatzaileak) {
 			try {
 				String sailkIzena = sailka;
