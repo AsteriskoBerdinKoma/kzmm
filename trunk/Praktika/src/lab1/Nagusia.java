@@ -10,10 +10,32 @@ import magick.MagickException;
 
 public class Nagusia {
 
+	private static boolean deleteDirectory(File path) {
+		if (path.exists()) {
+			File[] files = path.listFiles();
+			for (int i = 0; i < files.length; i++) {
+				if (files[i].isDirectory()) {
+					deleteDirectory(files[i]);
+				} else {
+					files[i].delete();
+				}
+			}
+		}
+		return (path.delete());
+	}
+	
 	public static void main(String[] args) {
 		try {
 			System.setProperty("jmagick.systemclassloader", "no");
 
+			new File("TRAIN.arff").delete();
+			new File("TEST.arff").delete();
+			new File("ALL.arff").delete();
+			new File("TRAIND.arff").delete();
+			new File("TESTD.arff").delete();
+			new File("ALLD.arff").delete();			
+			deleteDirectory(new File("irudiak"));
+			
 			String pathTrainIrudiak = args[0];
 			String pathTestIrudiak = args[1];
 
@@ -57,11 +79,11 @@ public class Nagusia {
 			// "TESTD.arff"));
 			// bwTestD.write(trainDtestD[1]);
 
-//			 emaitza = wekaKud.classify("TRAIN.arff", "TEST.arff");
-//			 bwEmaitza = new BufferedWriter(new FileWriter("irud_orig-not_discretized.txt"));
-//			 bwEmaitza.write("IRUDI ORIGINALAK - DISCRETIZATU GABE\n-------------------------------------\n\n");
-//			 bwEmaitza.write(emaitza);
-//			 bwEmaitza.close();
+			 emaitza = wekaKud.classify("TRAIN.arff", "TEST.arff");
+			 bwEmaitza = new BufferedWriter(new FileWriter("irud_orig-not_discretized.txt"));
+			 bwEmaitza.write("IRUDI ORIGINALAK - DISCRETIZATU GABE\n-------------------------------------\n\n");
+			 bwEmaitza.write(emaitza);
+			 bwEmaitza.close();
 
 			// emaitzaD = wekaKud.classify("TRAIND.arff", "TESTD.arff");
 			// bwEmaitzaD = new BufferedWriter(new FileWriter(

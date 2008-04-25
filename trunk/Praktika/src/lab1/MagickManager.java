@@ -203,49 +203,47 @@ public class MagickManager {
 		this.vTestIrudiFiltroekin = new Vector<MagickImages>();
 		this.kontTest = 0;
 
-//		vTrainIrudiFiltroekin.addElement(blur(vTrainIrudiak));
-//		vTestIrudiFiltroekin.addElement(blur(vTestIrudiak));
-//
-//		vTrainIrudiFiltroekin.addElement(sharpen(vTrainIrudiak));
-//		vTestIrudiFiltroekin.addElement(sharpen(vTestIrudiak));
-//
-//		vTrainIrudiFiltroekin.addElement(threshold(vTrainIrudiak));
-//		vTestIrudiFiltroekin.addElement(threshold(vTestIrudiak));
-//
-//		vTrainIrudiFiltroekin.addElement(addNoise(vTrainIrudiak));
-//		vTestIrudiFiltroekin.addElement(addNoise(vTestIrudiak));
+		vTrainIrudiFiltroekin.addElement(blur(vTrainIrudiak));
+		vTestIrudiFiltroekin.addElement(blur(vTestIrudiak));
 
-		//
+		vTrainIrudiFiltroekin.addElement(sharpen(vTrainIrudiak));
+		vTestIrudiFiltroekin.addElement(sharpen(vTestIrudiak));
+
+		vTrainIrudiFiltroekin.addElement(threshold(vTrainIrudiak));
+		vTestIrudiFiltroekin.addElement(threshold(vTestIrudiak));
+
+		vTrainIrudiFiltroekin.addElement(addNoise(vTrainIrudiak));
+		vTestIrudiFiltroekin.addElement(addNoise(vTestIrudiak));
+
 		vTrainIrudiFiltroekin.addElement(charcoal(vTrainIrudiak));
 		vTestIrudiFiltroekin.addElement(charcoal(vTestIrudiak));
 
-//		vTrainIrudiFiltroekin.addElement(contrast(vTrainIrudiak));
-//		vTestIrudiFiltroekin.addElement(contrast(vTestIrudiak));
+		vTrainIrudiFiltroekin.addElement(contrast(vTrainIrudiak));
+		vTestIrudiFiltroekin.addElement(contrast(vTestIrudiak));
 
-		//
 		vTrainIrudiFiltroekin.addElement(edge(vTrainIrudiak));
 		vTestIrudiFiltroekin.addElement(edge(vTestIrudiak));
-		//
+
 		vTrainIrudiFiltroekin.addElement(emboss(vTrainIrudiak));
 		vTestIrudiFiltroekin.addElement(emboss(vTestIrudiak));
 
-//		vTrainIrudiFiltroekin.addElement(equalize(vTrainIrudiak));
-//		vTestIrudiFiltroekin.addElement(equalize(vTestIrudiak));
-//
-//		vTrainIrudiFiltroekin.addElement(level(vTrainIrudiak));
-//		vTestIrudiFiltroekin.addElement(level(vTestIrudiak));
-//
-//		vTrainIrudiFiltroekin.addElement(negative(vTrainIrudiak));
-//		vTestIrudiFiltroekin.addElement(negative(vTestIrudiak));
-//
-//		vTrainIrudiFiltroekin.addElement(normalize(vTrainIrudiak));
-//		vTestIrudiFiltroekin.addElement(normalize(vTestIrudiak));
-//
-//		vTrainIrudiFiltroekin.addElement(segment(vTrainIrudiak));
-//		vTestIrudiFiltroekin.addElement(segment(vTestIrudiak));
-//
-//		vTrainIrudiFiltroekin.addElement(solarize(vTrainIrudiak));
-//		vTestIrudiFiltroekin.addElement(solarize(vTestIrudiak));
+		vTrainIrudiFiltroekin.addElement(equalize(vTrainIrudiak));
+		vTestIrudiFiltroekin.addElement(equalize(vTestIrudiak));
+
+		vTrainIrudiFiltroekin.addElement(level(vTrainIrudiak));
+		vTestIrudiFiltroekin.addElement(level(vTestIrudiak));
+
+		vTrainIrudiFiltroekin.addElement(negative(vTrainIrudiak));
+		vTestIrudiFiltroekin.addElement(negative(vTestIrudiak));
+
+		vTrainIrudiFiltroekin.addElement(normalize(vTrainIrudiak));
+		vTestIrudiFiltroekin.addElement(normalize(vTestIrudiak));
+
+		vTrainIrudiFiltroekin.addElement(segment(vTrainIrudiak));
+		vTestIrudiFiltroekin.addElement(segment(vTestIrudiak));
+
+		vTrainIrudiFiltroekin.addElement(solarize(vTrainIrudiak));
+		vTestIrudiFiltroekin.addElement(solarize(vTestIrudiak));
 
 		
 		
