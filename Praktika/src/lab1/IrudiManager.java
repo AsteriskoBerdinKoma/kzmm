@@ -13,9 +13,9 @@ public class IrudiManager {
 
 	public static String PATH_TEST;
 
-	public static String UNEKO_TRAIN_PATH;
+	private static String UNEKO_TRAIN_PATH;
 	
-	public static String UNEKO_TEST_PATH;
+	private static String UNEKO_TEST_PATH;
 
 	private Vector<Irudia> vTrainOriginalak;
 
@@ -29,8 +29,8 @@ public class IrudiManager {
 	public IrudiManager(String pathTrain, String pathTest) throws MagickException, IOException {
 		IrudiManager.PATH_TRAIN = pathTrain;
 		IrudiManager.PATH_TEST = pathTest;
-		IrudiManager.UNEKO_TRAIN_PATH = pathTrain;
-		IrudiManager.UNEKO_TEST_PATH = pathTest;
+		UNEKO_TRAIN_PATH = pathTrain;
+		UNEKO_TEST_PATH = pathTest;
 		magickKud = new MagickManager();
 		magickKud.filtroaAplikatu(this.getTrainOriginalak(), this.getTestOriginalak());
 	}
@@ -71,14 +71,12 @@ public class IrudiManager {
 	}
 
 	public Vector<Irudia> getUnekoTrain() throws IOException, MagickException{
-		if (vTrainUnekoa == null)
-			vTrainUnekoa = irudiakKargatu(UNEKO_TRAIN_PATH);
+		vTrainUnekoa = irudiakKargatu(UNEKO_TRAIN_PATH);
 		return vTrainUnekoa;
 	}
 	
 	public Vector<Irudia> getUnekoTest() throws IOException, MagickException{
-		if (vTestUnekoa == null)
-			vTestUnekoa = irudiakKargatu(UNEKO_TEST_PATH);
+		vTestUnekoa = irudiakKargatu(UNEKO_TEST_PATH);
 		return vTestUnekoa;
 	}
 	
