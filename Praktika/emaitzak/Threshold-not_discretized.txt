@@ -1,4 +1,4 @@
-Threshold - DISCRETIZATU GABE
+Threshold - DISKRETIZATU GABE
 -------------------------------------
 
 Filtroa: Threshold
@@ -205,13 +205,13 @@ SAILKATZAILEA: weka.classifiers.lazy.IB1
 Results
 =======
 
-Correctly Classified Instances          50               51.0204 %
-Incorrectly Classified Instances        48               48.9796 %
+Correctly Classified Instances          48               48.9796 %
+Incorrectly Classified Instances        50               51.0204 %
 Kappa statistic                          0     
-Mean absolute error                      0.4898
-Root mean squared error                  0.6999
-Relative absolute error                 97.9996 %
-Root relative squared error            140      %
+Mean absolute error                      0.5102
+Root mean squared error                  0.7143
+Relative absolute error                102.0829 %
+Root relative squared error            142.8869 %
 Total Number of Instances               98     
 
 
@@ -288,10 +288,10 @@ Results
 Correctly Classified Instances          48               48.9796 %
 Incorrectly Classified Instances        50               51.0204 %
 Kappa statistic                          0     
-Mean absolute error                      0.5001
-Root mean squared error                  0.5001
-Relative absolute error                100.0568 %
-Root relative squared error            100.0393 %
+Mean absolute error                      0.5   
+Root mean squared error                  0.5   
+Relative absolute error                100.0444 %
+Root relative squared error            100.0241 %
 Total Number of Instances               98     
 
 
@@ -800,10 +800,10 @@ Results
 Correctly Classified Instances          50               51.0204 %
 Incorrectly Classified Instances        48               48.9796 %
 Kappa statistic                          0     
-Mean absolute error                      0.4999
+Mean absolute error                      0.4998
 Root mean squared error                  0.4999
-Relative absolute error                100.0267 %
-Root relative squared error            100.0088 %
+Relative absolute error                 99.9912 %
+Root relative squared error            100.0008 %
 Total Number of Instances               98     
 
 
@@ -1037,13 +1037,13 @@ SAILKATZAILEA: weka.classifiers.lazy.IB1
 Results
 =======
 
-Correctly Classified Instances          50               51.0204 %
-Incorrectly Classified Instances        48               48.9796 %
+Correctly Classified Instances          48               48.9796 %
+Incorrectly Classified Instances        50               51.0204 %
 Kappa statistic                          0     
-Mean absolute error                      0.4898
-Root mean squared error                  0.6999
-Relative absolute error                 97.9996 %
-Root relative squared error            140      %
+Mean absolute error                      0.5102
+Root mean squared error                  0.7143
+Relative absolute error                102.0829 %
+Root relative squared error            142.8869 %
 Total Number of Instances               98     
 
 
@@ -1120,10 +1120,10 @@ Results
 Correctly Classified Instances          48               48.9796 %
 Incorrectly Classified Instances        50               51.0204 %
 Kappa statistic                          0     
-Mean absolute error                      0.5001
-Root mean squared error                  0.5001
-Relative absolute error                100.0568 %
-Root relative squared error            100.0393 %
+Mean absolute error                      0.5   
+Root mean squared error                  0.5   
+Relative absolute error                100.0444 %
+Root relative squared error            100.0241 %
 Total Number of Instances               98     
 
 
@@ -1632,10 +1632,10 @@ Results
 Correctly Classified Instances          50               51.0204 %
 Incorrectly Classified Instances        48               48.9796 %
 Kappa statistic                          0     
-Mean absolute error                      0.4999
+Mean absolute error                      0.4998
 Root mean squared error                  0.4999
-Relative absolute error                100.0267 %
-Root relative squared error            100.0088 %
+Relative absolute error                 99.9912 %
+Root relative squared error            100.0008 %
 Total Number of Instances               98     
 
 

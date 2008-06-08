@@ -1,4 +1,4 @@
-Edge - DISCRETIZATU GABE
+Edge - DISKRETIZATU GABE
 -------------------------------------
 
 Filtroa: Edge
@@ -141,13 +141,13 @@ SAILKATZAILEA: weka.classifiers.functions.RBFNetwork
 Results
 =======
 
-Correctly Classified Instances          74               75.5102 %
-Incorrectly Classified Instances        24               24.4898 %
-Kappa statistic                          0.5079
-Mean absolute error                      0.282 
-Root mean squared error                  0.4458
-Relative absolute error                 56.4144 %
-Root relative squared error             89.1696 %
+Correctly Classified Instances          70               71.4286 %
+Incorrectly Classified Instances        28               28.5714 %
+Kappa statistic                          0.4279
+Mean absolute error                      0.3063
+Root mean squared error                  0.4894
+Relative absolute error                 61.277  %
+Root relative squared error             97.9029 %
 Total Number of Instances               98     
 
 
@@ -173,13 +173,13 @@ SAILKATZAILEA: weka.classifiers.functions.SimpleLogistic
 Results
 =======
 
-Correctly Classified Instances          72               73.4694 %
-Incorrectly Classified Instances        26               26.5306 %
-Kappa statistic                          0.47  
-Mean absolute error                      0.3346
-Root mean squared error                  0.4713
-Relative absolute error                 66.948  %
-Root relative squared error             94.273  %
+Correctly Classified Instances          62               63.2653 %
+Incorrectly Classified Instances        36               36.7347 %
+Kappa statistic                          0.2656
+Mean absolute error                      0.4461
+Root mean squared error                  0.4786
+Relative absolute error                 89.2499 %
+Root relative squared error             95.7459 %
 Total Number of Instances               98     
 
 
@@ -189,13 +189,13 @@ SAILKATZAILEA: weka.classifiers.functions.VotedPerceptron
 Results
 =======
 
-Correctly Classified Instances          64               65.3061 %
-Incorrectly Classified Instances        34               34.6939 %
-Kappa statistic                          0.3058
-Mean absolute error                      0.3459
-Root mean squared error                  0.5826
-Relative absolute error                 69.2039 %
-Root relative squared error            116.5479 %
+Correctly Classified Instances          67               68.3673 %
+Incorrectly Classified Instances        31               31.6327 %
+Kappa statistic                          0.3679
+Mean absolute error                      0.3115
+Root mean squared error                  0.5554
+Relative absolute error                 62.3282 %
+Root relative squared error            111.1114 %
 Total Number of Instances               98     
 
 
@@ -301,13 +301,13 @@ SAILKATZAILEA: weka.classifiers.meta.Bagging
 Results
 =======
 
-Correctly Classified Instances          72               73.4694 %
-Incorrectly Classified Instances        26               26.5306 %
-Kappa statistic                          0.4678
-Mean absolute error                      0.387 
-Root mean squared error                  0.4193
-Relative absolute error                 77.4333 %
-Root relative squared error             83.8777 %
+Correctly Classified Instances          71               72.449  %
+Incorrectly Classified Instances        27               27.551  %
+Kappa statistic                          0.4471
+Mean absolute error                      0.4013
+Root mean squared error                  0.4394
+Relative absolute error                 80.2898 %
+Root relative squared error             87.9041 %
 Total Number of Instances               98     
 
 
@@ -413,13 +413,13 @@ SAILKATZAILEA: weka.classifiers.meta.MultiBoostAB
 Results
 =======
 
-Correctly Classified Instances          66               67.3469 %
-Incorrectly Classified Instances        32               32.6531 %
-Kappa statistic                          0.3499
-Mean absolute error                      0.334 
-Root mean squared error                  0.526 
-Relative absolute error                 66.8188 %
-Root relative squared error            105.2164 %
+Correctly Classified Instances          69               70.4082 %
+Incorrectly Classified Instances        29               29.5918 %
+Kappa statistic                          0.4096
+Mean absolute error                      0.3141
+Root mean squared error                  0.52  
+Relative absolute error                 62.8452 %
+Root relative squared error            104.0144 %
 Total Number of Instances               98     
 
 
@@ -493,13 +493,13 @@ SAILKATZAILEA: weka.classifiers.meta.RandomCommittee
 Results
 =======
 
-Correctly Classified Instances          63               64.2857 %
-Incorrectly Classified Instances        35               35.7143 %
-Kappa statistic                          0.2857
-Mean absolute error                      0.4398
-Root mean squared error                  0.4657
-Relative absolute error                 87.9955 %
-Root relative squared error             93.1509 %
+Correctly Classified Instances          60               61.2245 %
+Incorrectly Classified Instances        38               38.7755 %
+Kappa statistic                          0.2274
+Mean absolute error                      0.4388
+Root mean squared error                  0.4699
+Relative absolute error                 87.7913 %
+Root relative squared error             94.0018 %
 Total Number of Instances               98     
 
 
@@ -541,13 +541,13 @@ SAILKATZAILEA: weka.classifiers.meta.ThresholdSelector
 Results
 =======
 
-Correctly Classified Instances          59               60.2041 %
-Incorrectly Classified Instances        39               39.7959 %
-Kappa statistic                          0.2113
-Mean absolute error                      0.3812
-Root mean squared error                  0.5554
-Relative absolute error                 76.2685 %
-Root relative squared error            111.1091 %
+Correctly Classified Instances          61               62.2449 %
+Incorrectly Classified Instances        37               37.7551 %
+Kappa statistic                          0.2499
+Mean absolute error                      0.3689
+Root mean squared error                  0.5592
+Relative absolute error                 73.8147 %
+Root relative squared error            111.8671 %
 Total Number of Instances               98     
 
 
@@ -605,13 +605,13 @@ SAILKATZAILEA: weka.classifiers.rules.ConjunctiveRule
 Results
 =======
 
-Correctly Classified Instances          67               68.3673 %
-Incorrectly Classified Instances        31               31.6327 %
-Kappa statistic                          0.3694
-Mean absolute error                      0.416 
-Root mean squared error                  0.4651
-Relative absolute error                 83.2428 %
-Root relative squared error             93.0398 %
+Correctly Classified Instances          69               70.4082 %
+Incorrectly Classified Instances        29               29.5918 %
+Kappa statistic                          0.4087
+Mean absolute error                      0.4025
+Root mean squared error                  0.4586
+Relative absolute error                 80.5398 %
+Root relative squared error             91.7398 %
 Total Number of Instances               98     
 
 
@@ -637,13 +637,13 @@ SAILKATZAILEA: weka.classifiers.rules.JRip
 Results
 =======
 
-Correctly Classified Instances          67               68.3673 %
-Incorrectly Classified Instances        31               31.6327 %
-Kappa statistic                          0.3694
-Mean absolute error                      0.416 
-Root mean squared error                  0.4646
-Relative absolute error                 83.2289 %
-Root relative squared error             92.9408 %
+Correctly Classified Instances          61               62.2449 %
+Incorrectly Classified Instances        37               37.7551 %
+Kappa statistic                          0.2405
+Mean absolute error                      0.4294
+Root mean squared error                  0.5063
+Relative absolute error                 85.9185 %
+Root relative squared error            101.2818 %
 Total Number of Instances               98     
 
 
@@ -653,13 +653,13 @@ SAILKATZAILEA: weka.classifiers.rules.NNge
 Results
 =======
 
-Correctly Classified Instances          64               65.3061 %
-Incorrectly Classified Instances        34               34.6939 %
-Kappa statistic                          0.3047
-Mean absolute error                      0.3469
-Root mean squared error                  0.589 
-Relative absolute error                 69.4164 %
-Root relative squared error            117.8276 %
+Correctly Classified Instances          54               55.102  %
+Incorrectly Classified Instances        44               44.898  %
+Kappa statistic                          0.1135
+Mean absolute error                      0.449 
+Root mean squared error                  0.6701
+Relative absolute error                 89.833  %
+Root relative squared error            134.0398 %
 Total Number of Instances               98     
 
 
@@ -701,13 +701,13 @@ SAILKATZAILEA: weka.classifiers.rules.Ridor
 Results
 =======
 
-Correctly Classified Instances          67               68.3673 %
-Incorrectly Classified Instances        31               31.6327 %
-Kappa statistic                          0.3694
-Mean absolute error                      0.3163
-Root mean squared error                  0.5624
-Relative absolute error                 63.2914 %
-Root relative squared error            112.5093 %
+Correctly Classified Instances          70               71.4286 %
+Incorrectly Classified Instances        28               28.5714 %
+Kappa statistic                          0.4264
+Mean absolute error                      0.2857
+Root mean squared error                  0.5345
+Relative absolute error                 57.1664 %
+Root relative squared error            106.9268 %
 Total Number of Instances               98     
 
 
@@ -781,13 +781,13 @@ SAILKATZAILEA: weka.classifiers.trees.LMT
 Results
 =======
 
-Correctly Classified Instances          72               73.4694 %
-Incorrectly Classified Instances        26               26.5306 %
-Kappa statistic                          0.47  
-Mean absolute error                      0.3346
-Root mean squared error                  0.4713
-Relative absolute error                 66.948  %
-Root relative squared error             94.273  %
+Correctly Classified Instances          62               63.2653 %
+Incorrectly Classified Instances        36               36.7347 %
+Kappa statistic                          0.2656
+Mean absolute error                      0.4461
+Root mean squared error                  0.4786
+Relative absolute error                 89.2499 %
+Root relative squared error             95.7459 %
 Total Number of Instances               98     
 
 
@@ -797,13 +797,13 @@ SAILKATZAILEA: weka.classifiers.trees.REPTree
 Results
 =======
 
-Correctly Classified Instances          66               67.3469 %
-Incorrectly Classified Instances        32               32.6531 %
-Kappa statistic                          0.3439
-Mean absolute error                      0.3915
-Root mean squared error                  0.484 
-Relative absolute error                 78.3251 %
-Root relative squared error             96.8198 %
+Correctly Classified Instances          67               68.3673 %
+Incorrectly Classified Instances        31               31.6327 %
+Kappa statistic                          0.3694
+Mean absolute error                      0.4122
+Root mean squared error                  0.4662
+Relative absolute error                 82.4807 %
+Root relative squared error             93.2568 %
 Total Number of Instances               98     
 
 
@@ -813,13 +813,13 @@ SAILKATZAILEA: weka.classifiers.trees.RandomForest
 Results
 =======
 
-Correctly Classified Instances          67               68.3673 %
-Incorrectly Classified Instances        31               31.6327 %
-Kappa statistic                          0.371 
-Mean absolute error                      0.4316
-Root mean squared error                  0.4646
-Relative absolute error                 86.3621 %
-Root relative squared error             92.9314 %
+Correctly Classified Instances          62               63.2653 %
+Incorrectly Classified Instances        36               36.7347 %
+Kappa statistic                          0.2687
+Mean absolute error                      0.448 
+Root mean squared error                  0.4808
+Relative absolute error                 89.6288 %
+Root relative squared error             96.1704 %
 Total Number of Instances               98     
 
 
@@ -829,13 +829,13 @@ SAILKATZAILEA: weka.classifiers.trees.RandomTree
 Results
 =======
 
-Correctly Classified Instances          55               56.1224 %
-Incorrectly Classified Instances        43               43.8776 %
-Kappa statistic                          0.1195
-Mean absolute error                      0.4388
-Root mean squared error                  0.6624
-Relative absolute error                 87.7913 %
-Root relative squared error            132.5079 %
+Correctly Classified Instances          49               50      %
+Incorrectly Classified Instances        49               50      %
+Kappa statistic                          0     
+Mean absolute error                      0.5   
+Root mean squared error                  0.7071
+Relative absolute error                100.0412 %
+Root relative squared error            141.4508 %
 Total Number of Instances               98     
 
 
@@ -845,13 +845,13 @@ SAILKATZAILEA: weka.classifiers.trees.lmt.LogisticBase
 Results
 =======
 
-Correctly Classified Instances          72               73.4694 %
-Incorrectly Classified Instances        26               26.5306 %
-Kappa statistic                          0.47  
-Mean absolute error                      0.3346
-Root mean squared error                  0.4713
-Relative absolute error                 66.948  %
-Root relative squared error             94.273  %
+Correctly Classified Instances          62               63.2653 %
+Incorrectly Classified Instances        36               36.7347 %
+Kappa statistic                          0.2656
+Mean absolute error                      0.4461
+Root mean squared error                  0.4786
+Relative absolute error                 89.2499 %
+Root relative squared error             95.7459 %
 Total Number of Instances               98     
 
 
@@ -989,13 +989,13 @@ SAILKATZAILEA: weka.classifiers.functions.RBFNetwork
 Results
 =======
 
-Correctly Classified Instances          74               75.5102 %
-Incorrectly Classified Instances        24               24.4898 %
-Kappa statistic                          0.5079
-Mean absolute error                      0.282 
-Root mean squared error                  0.4458
-Relative absolute error                 56.4144 %
-Root relative squared error             89.1696 %
+Correctly Classified Instances          70               71.4286 %
+Incorrectly Classified Instances        28               28.5714 %
+Kappa statistic                          0.4279
+Mean absolute error                      0.3063
+Root mean squared error                  0.4894
+Relative absolute error                 61.277  %
+Root relative squared error             97.9029 %
 Total Number of Instances               98     
 
 
@@ -1021,13 +1021,13 @@ SAILKATZAILEA: weka.classifiers.functions.SimpleLogistic
 Results
 =======
 
-Correctly Classified Instances          72               73.4694 %
-Incorrectly Classified Instances        26               26.5306 %
-Kappa statistic                          0.47  
-Mean absolute error                      0.3346
-Root mean squared error                  0.4713
-Relative absolute error                 66.948  %
-Root relative squared error             94.273  %
+Correctly Classified Instances          62               63.2653 %
+Incorrectly Classified Instances        36               36.7347 %
+Kappa statistic                          0.2656
+Mean absolute error                      0.4461
+Root mean squared error                  0.4786
+Relative absolute error                 89.2499 %
+Root relative squared error             95.7459 %
 Total Number of Instances               98     
 
 
@@ -1037,13 +1037,13 @@ SAILKATZAILEA: weka.classifiers.functions.VotedPerceptron
 Results
 =======
 
-Correctly Classified Instances          64               65.3061 %
-Incorrectly Classified Instances        34               34.6939 %
-Kappa statistic                          0.3058
-Mean absolute error                      0.3459
-Root mean squared error                  0.5826
-Relative absolute error                 69.2039 %
-Root relative squared error            116.5479 %
+Correctly Classified Instances          67               68.3673 %
+Incorrectly Classified Instances        31               31.6327 %
+Kappa statistic                          0.3679
+Mean absolute error                      0.3115
+Root mean squared error                  0.5554
+Relative absolute error                 62.3282 %
+Root relative squared error            111.1114 %
 Total Number of Instances               98     
 
 
@@ -1149,13 +1149,13 @@ SAILKATZAILEA: weka.classifiers.meta.Bagging
 Results
 =======
 
-Correctly Classified Instances          72               73.4694 %
-Incorrectly Classified Instances        26               26.5306 %
-Kappa statistic                          0.4678
-Mean absolute error                      0.387 
-Root mean squared error                  0.4193
-Relative absolute error                 77.4333 %
-Root relative squared error             83.8777 %
+Correctly Classified Instances          71               72.449  %
+Incorrectly Classified Instances        27               27.551  %
+Kappa statistic                          0.4471
+Mean absolute error                      0.4013
+Root mean squared error                  0.4394
+Relative absolute error                 80.2898 %
+Root relative squared error             87.9041 %
 Total Number of Instances               98     
 
 
@@ -1261,13 +1261,13 @@ SAILKATZAILEA: weka.classifiers.meta.MultiBoostAB
 Results
 =======
 
-Correctly Classified Instances          66               67.3469 %
-Incorrectly Classified Instances        32               32.6531 %
-Kappa statistic                          0.3499
-Mean absolute error                      0.334 
-Root mean squared error                  0.526 
-Relative absolute error                 66.8188 %
-Root relative squared error            105.2164 %
+Correctly Classified Instances          69               70.4082 %
+Incorrectly Classified Instances        29               29.5918 %
+Kappa statistic                          0.4096
+Mean absolute error                      0.3141
+Root mean squared error                  0.52  
+Relative absolute error                 62.8452 %
+Root relative squared error            104.0144 %
 Total Number of Instances               98     
 
 
@@ -1341,13 +1341,13 @@ SAILKATZAILEA: weka.classifiers.meta.RandomCommittee
 Results
 =======
 
-Correctly Classified Instances          63               64.2857 %
-Incorrectly Classified Instances        35               35.7143 %
-Kappa statistic                          0.2857
-Mean absolute error                      0.4398
-Root mean squared error                  0.4657
-Relative absolute error                 87.9955 %
-Root relative squared error             93.1509 %
+Correctly Classified Instances          60               61.2245 %
+Incorrectly Classified Instances        38               38.7755 %
+Kappa statistic                          0.2274
+Mean absolute error                      0.4388
+Root mean squared error                  0.4699
+Relative absolute error                 87.7913 %
+Root relative squared error             94.0018 %
 Total Number of Instances               98     
 
 
@@ -1389,13 +1389,13 @@ SAILKATZAILEA: weka.classifiers.meta.ThresholdSelector
 Results
 =======
 
-Correctly Classified Instances          59               60.2041 %
-Incorrectly Classified Instances        39               39.7959 %
-Kappa statistic                          0.2113
-Mean absolute error                      0.3812
-Root mean squared error                  0.5554
-Relative absolute error                 76.2685 %
-Root relative squared error            111.1091 %
+Correctly Classified Instances          61               62.2449 %
+Incorrectly Classified Instances        37               37.7551 %
+Kappa statistic                          0.2499
+Mean absolute error                      0.3689
+Root mean squared error                  0.5592
+Relative absolute error                 73.8147 %
+Root relative squared error            111.8671 %
 Total Number of Instances               98     
 
 
@@ -1453,13 +1453,13 @@ SAILKATZAILEA: weka.classifiers.rules.ConjunctiveRule
 Results
 =======
 
-Correctly Classified Instances          67               68.3673 %
-Incorrectly Classified Instances        31               31.6327 %
-Kappa statistic                          0.3694
-Mean absolute error                      0.416 
-Root mean squared error                  0.4651
-Relative absolute error                 83.2428 %
-Root relative squared error             93.0398 %
+Correctly Classified Instances          69               70.4082 %
+Incorrectly Classified Instances        29               29.5918 %
+Kappa statistic                          0.4087
+Mean absolute error                      0.4025
+Root mean squared error                  0.4586
+Relative absolute error                 80.5398 %
+Root relative squared error             91.7398 %
 Total Number of Instances               98     
 
 
@@ -1485,13 +1485,13 @@ SAILKATZAILEA: weka.classifiers.rules.JRip
 Results
 =======
 
-Correctly Classified Instances          67               68.3673 %
-Incorrectly Classified Instances        31               31.6327 %
-Kappa statistic                          0.3694
-Mean absolute error                      0.416 
-Root mean squared error                  0.4646
-Relative absolute error                 83.2289 %
-Root relative squared error             92.9408 %
+Correctly Classified Instances          61               62.2449 %
+Incorrectly Classified Instances        37               37.7551 %
+Kappa statistic                          0.2405
+Mean absolute error                      0.4294
+Root mean squared error                  0.5063
+Relative absolute error                 85.9185 %
+Root relative squared error            101.2818 %
 Total Number of Instances               98     
 
 
@@ -1501,13 +1501,13 @@ SAILKATZAILEA: weka.classifiers.rules.NNge
 Results
 =======
 
-Correctly Classified Instances          64               65.3061 %
-Incorrectly Classified Instances        34               34.6939 %
-Kappa statistic                          0.3047
-Mean absolute error                      0.3469
-Root mean squared error                  0.589 
-Relative absolute error                 69.4164 %
-Root relative squared error            117.8276 %
+Correctly Classified Instances          54               55.102  %
+Incorrectly Classified Instances        44               44.898  %
+Kappa statistic                          0.1135
+Mean absolute error                      0.449 
+Root mean squared error                  0.6701
+Relative absolute error                 89.833  %
+Root relative squared error            134.0398 %
 Total Number of Instances               98     
 
 
@@ -1549,13 +1549,13 @@ SAILKATZAILEA: weka.classifiers.rules.Ridor
 Results
 =======
 
-Correctly Classified Instances          67               68.3673 %
-Incorrectly Classified Instances        31               31.6327 %
-Kappa statistic                          0.3694
-Mean absolute error                      0.3163
-Root mean squared error                  0.5624
-Relative absolute error                 63.2914 %
-Root relative squared error            112.5093 %
+Correctly Classified Instances          70               71.4286 %
+Incorrectly Classified Instances        28               28.5714 %
+Kappa statistic                          0.4264
+Mean absolute error                      0.2857
+Root mean squared error                  0.5345
+Relative absolute error                 57.1664 %
+Root relative squared error            106.9268 %
 Total Number of Instances               98     
 
 
@@ -1629,13 +1629,13 @@ SAILKATZAILEA: weka.classifiers.trees.LMT
 Results
 =======
 
-Correctly Classified Instances          72               73.4694 %
-Incorrectly Classified Instances        26               26.5306 %
-Kappa statistic                          0.47  
-Mean absolute error                      0.3346
-Root mean squared error                  0.4713
-Relative absolute error                 66.948  %
-Root relative squared error             94.273  %
+Correctly Classified Instances          62               63.2653 %
+Incorrectly Classified Instances        36               36.7347 %
+Kappa statistic                          0.2656
+Mean absolute error                      0.4461
+Root mean squared error                  0.4786
+Relative absolute error                 89.2499 %
+Root relative squared error             95.7459 %
 Total Number of Instances               98     
 
 
@@ -1645,13 +1645,13 @@ SAILKATZAILEA: weka.classifiers.trees.REPTree
 Results
 =======
 
-Correctly Classified Instances          66               67.3469 %
-Incorrectly Classified Instances        32               32.6531 %
-Kappa statistic                          0.3439
-Mean absolute error                      0.3915
-Root mean squared error                  0.484 
-Relative absolute error                 78.3251 %
-Root relative squared error             96.8198 %
+Correctly Classified Instances          67               68.3673 %
+Incorrectly Classified Instances        31               31.6327 %
+Kappa statistic                          0.3694
+Mean absolute error                      0.4122
+Root mean squared error                  0.4662
+Relative absolute error                 82.4807 %
+Root relative squared error             93.2568 %
 Total Number of Instances               98     
 
 
@@ -1661,13 +1661,13 @@ SAILKATZAILEA: weka.classifiers.trees.RandomForest
 Results
 =======
 
-Correctly Classified Instances          67               68.3673 %
-Incorrectly Classified Instances        31               31.6327 %
-Kappa statistic                          0.371 
-Mean absolute error                      0.4316
-Root mean squared error                  0.4646
-Relative absolute error                 86.3621 %
-Root relative squared error             92.9314 %
+Correctly Classified Instances          62               63.2653 %
+Incorrectly Classified Instances        36               36.7347 %
+Kappa statistic                          0.2687
+Mean absolute error                      0.448 
+Root mean squared error                  0.4808
+Relative absolute error                 89.6288 %
+Root relative squared error             96.1704 %
 Total Number of Instances               98     
 
 
@@ -1677,13 +1677,13 @@ SAILKATZAILEA: weka.classifiers.trees.RandomTree
 Results
 =======
 
-Correctly Classified Instances          55               56.1224 %
-Incorrectly Classified Instances        43               43.8776 %
-Kappa statistic                          0.1195
-Mean absolute error                      0.4388
-Root mean squared error                  0.6624
-Relative absolute error                 87.7913 %
-Root relative squared error            132.5079 %
+Correctly Classified Instances          49               50      %
+Incorrectly Classified Instances        49               50      %
+Kappa statistic                          0     
+Mean absolute error                      0.5   
+Root mean squared error                  0.7071
+Relative absolute error                100.0412 %
+Root relative squared error            141.4508 %
 Total Number of Instances               98     
 
 
@@ -1693,11 +1693,11 @@ SAILKATZAILEA: weka.classifiers.trees.lmt.LogisticBase
 Results
 =======
 
-Correctly Classified Instances          72               73.4694 %
-Incorrectly Classified Instances        26               26.5306 %
-Kappa statistic                          0.47  
-Mean absolute error                      0.3346
-Root mean squared error                  0.4713
-Relative absolute error                 66.948  %
-Root relative squared error             94.273  %
+Correctly Classified Instances          62               63.2653 %
+Incorrectly Classified Instances        36               36.7347 %
+Kappa statistic                          0.2656
+Mean absolute error                      0.4461
+Root mean squared error                  0.4786
+Relative absolute error                 89.2499 %
+Root relative squared error             95.7459 %
 Total Number of Instances               98     
