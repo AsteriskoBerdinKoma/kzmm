@@ -146,6 +146,9 @@ public class Nagusia {
 		try {
 			System.setProperty("jmagick.systemclassloader", "no");
 
+			String ezDiskEmaitzenDir = "emaitzak"+File.separator+"ez_diskretizatuta";
+			String diskEmaitzenDir = "emaitzak"+File.separator+"diskretizatuta";
+			
 			//Aurretik existitzen diren ARFF fitxategiak ezabatu
 			new File("TRAIN.arff").delete();
 			new File("TEST.arff").delete();
@@ -192,7 +195,7 @@ public class Nagusia {
 			System.out.println("DISKRETIZATU GABEKO SAILKAPENA...\n");
 			emaitza = wekaKud.classify("TRAIN.arff", "TEST.arff");
 			bwEmaitza = new BufferedWriter(new FileWriter(
-					"irud_orig-not_discretized.txt"));
+					ezDiskEmaitzenDir + File.separator + "irud_orig-not_discretized.txt"));
 			bwEmaitza
 					.write("IRUDI ORIGINALAK - DISKRETIZATU GABE\n-------------------------------------\n\n");
 			bwEmaitza.write(emaitza);
@@ -201,7 +204,7 @@ public class Nagusia {
 			System.out.println("DISKRETIZATUTAKO SAILKAPENA...\n");
 			emaitzaD = wekaKud.classify("TRAIND.arff", "TESTD.arff");
 			bwEmaitzaD = new BufferedWriter(new FileWriter(
-					"irud_orig-discretized.txt"));
+					diskEmaitzenDir + File.separator + "irud_orig-discretized.txt"));
 			bwEmaitzaD
 					.write("IRUDI ORIGINALAK - DISKRETIZATUTA\n-------------------------------------\n\n");
 			bwEmaitzaD.write(emaitzaD);
@@ -240,7 +243,7 @@ public class Nagusia {
 				String unekoFiltro = irudiKud.getUnekoFiltroa();
 
 				emaitza = wekaKud.classify("TRAIN.arff", "TEST.arff");
-				bwEmaitza = new BufferedWriter(new FileWriter(unekoFiltro
+				bwEmaitza = new BufferedWriter(new FileWriter(ezDiskEmaitzenDir + File.separator + unekoFiltro
 						+ "-not_discretized.txt"));
 				bwEmaitza
 						.write(unekoFiltro
@@ -250,7 +253,7 @@ public class Nagusia {
 				bwEmaitza.close();
 
 				 emaitzaD = wekaKud.classify("TRAIND.arff", "TESTD.arff");
-				 bwEmaitzaD = new BufferedWriter(new FileWriter(unekoFiltro
+				 bwEmaitzaD = new BufferedWriter(new FileWriter(diskEmaitzenDir + File.separator + unekoFiltro
 				 + "-discretized.txt"));
 				 bwEmaitzaD
 				 .write(unekoFiltro + " - DISKRETIZATUTA\n-------------------------------------\n\n");
