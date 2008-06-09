@@ -308,10 +308,10 @@ public class Nagusia {
 					//bwEmaitzaD.write(emaitzaD);
 					bwEmaitzaD.close();
 					
-					emaitzaUD = wekaKud.classify("TRAIND.arff", "TESTD.arff");
+					emaitzaUD = wekaKud.classify("TRAINUD.arff", "TESTUD.arff");
 					bwEmaitzaUD = new BufferedWriter(new FileWriter(
 							uDiskEmaitzenDir + File.separator + unekoFiltro
-									+ "-discretized.txt"));
+									+ "-unsupervised_discretized.txt"));
 					bwEmaitzaUD
 							.write(unekoFiltro
 									+ " - GAINBEGIRATU GABE DISKRETIZATUTA\n-------------------------------------\n\n");
