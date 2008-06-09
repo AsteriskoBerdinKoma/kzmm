@@ -1,4 +1,4 @@
-package lab1;
+package bertsioAurreratua;
 
 import java.io.BufferedWriter;
 import java.io.File;
