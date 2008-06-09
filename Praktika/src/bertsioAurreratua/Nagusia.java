@@ -150,7 +150,7 @@ public class Nagusia {
 
 			String emaDir = "emaitzak";
 			if (args.length > 2)
-				emaDir = args[3];
+				emaDir = args[2];
 
 			String ezDiskEmaitzenDir = emaDir + File.separator
 					+ "ez_diskretizatuta";
