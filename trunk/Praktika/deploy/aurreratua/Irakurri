@@ -1,0 +1,29 @@
+Instalazioa
+------------
+
+Oharra: Javaren 6.bertsioa instalatuta eta konfiguratuta dagoela suposatuko da.
+
+1- JMagick intalatu. Debianen oinarritutako distribuzioetan apt-ren bidez instalatu daiteke libjmagick6-jni paketea instalatuz. Komando hau egikarituz instalatu daiteke:
+	# apt-get install libjmagick6-jni
+
+2- Praktikaren fitxategi guztiak katalogo berdinean gorde. praktika.sh, praktika.jar eta lib katalogoa destrinkotu fitxategi sistemaren katalogo batetan.
+
+3- praktika.sh fitxategia aldatu eta jmagick_jni aldagaiaren balioa aldatu eta libJMagick.so liburutegiaren kokalekua adierazi. JMagick apt-ren bitartez instalatu bada seguruenik /usr/lib/jni katalogoan egongo da eta defektuz hori da jmagick_jni aldagaiaren balioa.
+
+Exekuzioa
+----------
+1- praktika.sh fitxategiari exekuzio baimenak eman, horretarako honako komandoa egikaritu praktika.sh-ren katalogoan kokatu eta gero.
+	$ chmod +x praktika.sh
+
+2- Aplikazioa egikaritzeko honakoa egikaritu:
+	$ ./praktika.sh trainIrudienBidea testIrudienBidea [emaitzakGordetzekoBidea]
+
+	Parametroak
+	-----------
+	  · trainIrudienBidea: Entrenamendurako erabiliko diren irudiak kokatzen diren katalogoaren bidea. (Beharrezkoa)
+	  · testIrudienBidea: Sailkatu nahi diren irudiak kokatzen diren katalogoaren bidea. (Beharrezkoa)
+	  · emaitzakGordetzekoBidea: Sailkapenen emaitzak gordeko diren katalogoaren bidea. Parametro hau ez da beharrezkoa, ezer ez bazaio adierazten programak praktika.sh-ren katalogoan emaitzak izeneko direktorio bat sortuko du eta bertan gordeko ditu emaitzak. (Hautazkoa)
+
+Oharrak
+--------
+ADI! Programa honek eragiketa astunak buru behar ditu eta beraz futzionatu ahal izateko ordenagailu nahiko potentea behar du. Gutxienez 2GB-eko RAM memoria duen ordenagailua behar da, bestela Javak errore mezua jaurtiko du memoria nahikoa ez duela esanez. Prozesadore potentea edukitzea ere gomendagarria da. Programa osorik exekutatu dadin ordubete inguru behar duela estimatzen da.
