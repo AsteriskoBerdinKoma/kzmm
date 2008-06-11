@@ -24,129 +24,21 @@ public class Nagusia {
 		return (path.delete());
 	}
 
-	public void prozesatu(String trainPath, String testPath) throws Exception {
-		// Aurretik existitzen diren ARFF fitxategiak ezabatu
-		new File("TRAIN.arff").delete();
-		new File("TEST.arff").delete();
-		new File("ALL.arff").delete();
-		new File("TRAIND.arff").delete();
-		new File("TESTD.arff").delete();
-		new File("ALLD.arff").delete();
-		deleteDirectory(new File("irudiak"));
-
-		// Entrenamendu eta Froga irudien katalogoa finkatu
-		String pathTrainIrudiak = trainPath;
-		String pathTestIrudiak = testPath;
-
-		// Irudien iragazketa, Arff fitxategien sorrera eta Sailkatze prozesua
-		// kontrolatzen duten objektuak hasieratu
-		IrudiManager irudiKud = new IrudiManager(pathTrainIrudiak,
-				pathTestIrudiak);
-		ARFFManager arff = new ARFFManager();
-		WekaManager wekaKud = new WekaManager();
-
-		System.out.println("Emandako TR Irudiak bektorizatzen...\n");
-		Vector<Irudia> vTrain = irudiKud.getTrainOriginalak();
-		System.out.println("Emandako TS Irudiak bektorizatzen...\n");
-		Vector<Irudia> vTest = irudiKud.getTestOriginalak();
-		System.out.println("Emandako irudi guztiak bektorizatzen...\n");
-		Vector<Irudia> vAll = irudiKud.getAllOriginalak();
-
-		BufferedWriter bwEmaitza;
-		BufferedWriter bwEmaitzaD;
-		String emaitza = "";
-		String emaitzaD = "";
-
-		System.out.println("TRAIN.arff fitxategia sortzen...\n");
-		arff.toARFF(vTrain, "TRAIN.arff");
-		System.out.println("TEST.arff fitxategia sortzen...\n");
-		arff.toARFF(vTest, "TEST.arff");
-		System.out.println("ALL.arff fitxategia sortzen...\n");
-		arff.toARFF(vAll, "ALL.arff");
-		System.out.println("ALL.arff fitxategia diskretizatzen...\n");
-		wekaKud.discretize("ALL.arff", "ALLD.arff");
-		System.out.println("ALLD.arff fitxategia bitan banatzen...\n");
-		arff.separateDiscretized("ALLD.arff", "TRAIND.arff", "TESTD.arff",
-				new File(pathTrainIrudiak).list().length);
-
-		System.out.println("DISKRETIZATU GABEKO SAILKAPENA...\n");
-		emaitza = wekaKud.classify("TRAIN.arff", "TEST.arff");
-		bwEmaitza = new BufferedWriter(new FileWriter(
-				"irud_orig-not_discretized.txt"));
-		bwEmaitza
-				.write("IRUDI ORIGINALAK - DISKRETIZATU GABE\n-------------------------------------\n\n");
-		bwEmaitza.write(emaitza);
-		bwEmaitza.close();
-
-		System.out.println("DISKRETIZATUTAKO SAILKAPENA...\n");
-		emaitzaD = wekaKud.classify("TRAIND.arff", "TESTD.arff");
-		bwEmaitzaD = new BufferedWriter(new FileWriter(
-				"irud_orig-discretized.txt"));
-		bwEmaitzaD
-				.write("IRUDI ORIGINALAK - DISKRETIZATUTA\n-------------------------------------\n\n");
-		bwEmaitzaD.write(emaitzaD);
-		bwEmaitzaD.close();
-
-		File f1 = new File("TRAIN.arff");
-		File f2 = new File("TEST.arff");
-		File f3 = new File("ALL.arff");
-		File f4 = new File("TRAIND.arff");
-		File f5 = new File("TESTD.arff");
-		File f6 = new File("ALLD.arff");
-
-		System.runFinalization();
-
-		// FILTROEKIN
-		while (irudiKud.next()) {
-			f1.delete();
-			f2.delete();
-			f3.delete();
-			f4.delete();
-			f5.delete();
-			f6.delete();
-
-			vTrain = irudiKud.getUnekoTrain();
-			vTest = irudiKud.getUnekoTest();
-			vAll = irudiKud.getUnekoAllIrudiak();
-
-			arff.toARFF(vTrain, "TRAIN.arff");
-			arff.toARFF(vTest, "TEST.arff");
-
-			arff.toARFF(vAll, "ALL.arff");
-			wekaKud.discretize("ALL.arff", "ALLD.arff");
-			arff.separateDiscretized("ALLD.arff", "TRAIND.arff", "TESTD.arff",
-					new File(pathTrainIrudiak).list().length);
-
-			String unekoFiltro = irudiKud.getUnekoFiltroa();
-
-			emaitza = wekaKud.classify("TRAIN.arff", "TEST.arff");
-			bwEmaitza = new BufferedWriter(new FileWriter(unekoFiltro
-					+ "-not_discretized.txt"));
-			bwEmaitza
-					.write(unekoFiltro
-							+ " - DISKRETIZATU GABE\n-------------------------------------\n\n");
-			bwEmaitza.write(irudiKud.getUnekoInfo() + "\n\n" + emaitza);
-			bwEmaitza.write(emaitza);
-			bwEmaitza.close();
-
-			emaitzaD = wekaKud.classify("TRAIND.arff", "TESTD.arff");
-			bwEmaitzaD = new BufferedWriter(new FileWriter(unekoFiltro
-					+ "-discretized.txt"));
-			bwEmaitzaD
-					.write(unekoFiltro
-							+ " - DISKRETIZATUTA\n-------------------------------------\n\n");
-			bwEmaitzaD.write(irudiKud.getUnekoInfo() + "\n\n" + emaitza);
-			bwEmaitzaD.write(emaitzaD);
-			bwEmaitzaD.close();
-
-			System.runFinalization();
-		}
-
-	}
-
 	public static void main(String[] args) {
 		try {
 			System.setProperty("jmagick.systemclassloader", "no");
+
+			String noDiskFiltroa = "";
+			String noDiskSailk = "";
+			double noDiskAsmatzea = -1;
+
+			String diskFiltroa = "";
+			String diskSailk = "";
+			double diskAsmatzea = -1;
+
+			String uDiskFiltroa = "";
+			String uDiskSailk = "";
+			double uDiskAsmatzea = -1;
 
 			String emaDir = "emaitzak";
 			if (args.length > 2)
@@ -155,7 +47,8 @@ public class Nagusia {
 			String ezDiskEmaitzenDir = emaDir + File.separator
 					+ "ez_diskretizatuta";
 			String diskEmaitzenDir = emaDir + File.separator + "diskretizatuta";
-			String uDiskEmaitzenDir = emaDir + File.separator + "gainbGabe_Diskretizatuta";
+			String uDiskEmaitzenDir = emaDir + File.separator
+					+ "gainbGabe_Diskretizatuta";
 			new File(ezDiskEmaitzenDir).mkdirs();
 			new File(diskEmaitzenDir).mkdirs();
 			new File(uDiskEmaitzenDir).mkdirs();
@@ -206,12 +99,15 @@ public class Nagusia {
 				wekaKud.discretize("ALL.arff", "ALLD.arff");
 				System.out.println("ALLD.arff fitxategia bitan banatzen...\n");
 				arff.separateDiscretized("ALLD.arff", "TRAIND.arff",
-						"TESTD.arff", new File(pathTrainIrudiak).list().length);				
-				System.out.println("ALL.arff fitxategia gainbegiratu gabe diskretizatzen...\n");
+						"TESTD.arff", new File(pathTrainIrudiak).list().length);
+				System.out
+						.println("ALL.arff fitxategia gainbegiratu gabe diskretizatzen...\n");
 				wekaKud.discretizeUnsupervised("ALL.arff", "ALLUD.arff");
 				System.out.println("ALLUD.arff fitxategia bitan banatzen...\n");
-				arff.separateDiscretized("ALLUD.arff", "TRAINUD.arff",
-						"TESTUD.arff", new File(pathTrainIrudiak).list().length);
+				arff
+						.separateDiscretized("ALLUD.arff", "TRAINUD.arff",
+								"TESTUD.arff", new File(pathTrainIrudiak)
+										.list().length);
 
 				System.out.println("DISKRETIZATU GABEKO SAILKAPENA...\n");
 				emaitza = wekaKud.classify("TRAIN.arff", "TEST.arff");
@@ -222,6 +118,12 @@ public class Nagusia {
 				bwEmaitza.write(emaitza);
 				bwEmaitza.close();
 
+				if (wekaKud.getAsmatzea() > noDiskAsmatzea) {
+					noDiskAsmatzea = wekaKud.getAsmatzea();
+					noDiskSailk = wekaKud.getSailkatzailea();
+					noDiskFiltroa = "Filtrorik gabe";
+				}
+
 				System.out.println("DISKRETIZATUTAKO SAILKAPENA...\n");
 				emaitzaD = wekaKud.classify("TRAIND.arff", "TESTD.arff");
 				bwEmaitzaD = new BufferedWriter(new FileWriter(diskEmaitzenDir
@@ -230,15 +132,29 @@ public class Nagusia {
 						.write("IRUDI ORIGINALAK - DISKRETIZATUTA\n-------------------------------------\n\n");
 				bwEmaitzaD.write(emaitzaD);
 				bwEmaitzaD.close();
-				
-				System.out.println("GAINBEGIRATU GABEKO DISKRETIZATUTAKO SAILKAPENA...\n");
+
+				if (wekaKud.getAsmatzea() > noDiskAsmatzea) {
+					diskAsmatzea = wekaKud.getAsmatzea();
+					diskSailk = wekaKud.getSailkatzailea();
+					diskFiltroa = "Filtrorik gabe";
+				}
+
+				System.out
+						.println("GAINBEGIRATU GABEKO DISKRETIZATUTAKO SAILKAPENA...\n");
 				emaitzaUD = wekaKud.classify("TRAINUD.arff", "TESTUD.arff");
-				bwEmaitzaUD = new BufferedWriter(new FileWriter(uDiskEmaitzenDir
-						+ File.separator + "irud_orig-unsupervised_discretized.txt"));
+				bwEmaitzaUD = new BufferedWriter(new FileWriter(
+						uDiskEmaitzenDir + File.separator
+								+ "irud_orig-unsupervised_discretized.txt"));
 				bwEmaitzaUD
 						.write("IRUDI ORIGINALAK - GAINBEGIRATU GABE DISKRETIZATUTA\n-------------------------------------\n\n");
 				bwEmaitzaUD.write(emaitzaUD);
 				bwEmaitzaUD.close();
+
+				if (wekaKud.getAsmatzea() > noDiskAsmatzea) {
+					uDiskAsmatzea = wekaKud.getAsmatzea();
+					uDiskSailk = wekaKud.getSailkatzailea();
+					uDiskFiltroa = "Filtrorik gabe";
+				}
 
 				File f1 = new File("TRAIN.arff");
 				File f2 = new File("TEST.arff");
@@ -276,7 +192,7 @@ public class Nagusia {
 					arff.separateDiscretized("ALLD.arff", "TRAIND.arff",
 							"TESTD.arff",
 							new File(pathTrainIrudiak).list().length);
-					
+
 					arff.toARFF(vAll, "ALL.arff");
 					wekaKud.discretizeUnsupervised("ALL.arff", "ALLUD.arff");
 					arff.separateDiscretized("ALLUD.arff", "TRAINUD.arff",
@@ -293,8 +209,14 @@ public class Nagusia {
 							.write(unekoFiltro
 									+ " - DISKRETIZATU GABE\n-------------------------------------\n\n");
 					bwEmaitza.write(irudiKud.getUnekoInfo() + "\n\n" + emaitza);
-					//bwEmaitza.write(emaitza);
+					// bwEmaitza.write(emaitza);
 					bwEmaitza.close();
+
+					if (wekaKud.getAsmatzea() > noDiskAsmatzea) {
+						noDiskAsmatzea = wekaKud.getAsmatzea();
+						noDiskSailk = wekaKud.getSailkatzailea();
+						noDiskFiltroa = irudiKud.getUnekoInfo();
+					}
 
 					emaitzaD = wekaKud.classify("TRAIND.arff", "TESTD.arff");
 					bwEmaitzaD = new BufferedWriter(new FileWriter(
@@ -303,11 +225,17 @@ public class Nagusia {
 					bwEmaitzaD
 							.write(unekoFiltro
 									+ " - DISKRETIZATUTA\n-------------------------------------\n\n");
-					bwEmaitzaD
-							.write(irudiKud.getUnekoInfo() + "\n\n" + emaitzaD);
-					//bwEmaitzaD.write(emaitzaD);
+					bwEmaitzaD.write(irudiKud.getUnekoInfo() + "\n\n"
+							+ emaitzaD);
+					// bwEmaitzaD.write(emaitzaD);
 					bwEmaitzaD.close();
-					
+
+					if (wekaKud.getAsmatzea() > noDiskAsmatzea) {
+						diskAsmatzea = wekaKud.getAsmatzea();
+						diskSailk = wekaKud.getSailkatzailea();
+						diskFiltroa = irudiKud.getUnekoInfo();
+					}
+
 					emaitzaUD = wekaKud.classify("TRAINUD.arff", "TESTUD.arff");
 					bwEmaitzaUD = new BufferedWriter(new FileWriter(
 							uDiskEmaitzenDir + File.separator + unekoFiltro
@@ -315,24 +243,44 @@ public class Nagusia {
 					bwEmaitzaUD
 							.write(unekoFiltro
 									+ " - GAINBEGIRATU GABE DISKRETIZATUTA\n-------------------------------------\n\n");
-					bwEmaitzaUD
-							.write(irudiKud.getUnekoInfo() + "\n\n" + emaitzaUD);
-					//bwEmaitzaUD.write(emaitzaUD);
+					bwEmaitzaUD.write(irudiKud.getUnekoInfo() + "\n\n"
+							+ emaitzaUD);
+					// bwEmaitzaUD.write(emaitzaUD);
 					bwEmaitzaUD.close();
 
+					if (wekaKud.getAsmatzea() > noDiskAsmatzea) {
+						uDiskAsmatzea = wekaKud.getAsmatzea();
+						uDiskSailk = wekaKud.getSailkatzailea();
+						uDiskFiltroa = irudiKud.getUnekoInfo();
+					}
+
 					System.runFinalization();
+
+					System.out
+							.println("Bukatua. Hauek izan dira emaitzik onenak:");
+					System.out.println("Diskretizatu gabe:\n"
+							+ "------------------");
+					System.out.println("\tSailkatzailea: " + noDiskSailk);
+					System.out.println("\t" + noDiskFiltroa);
+					System.out.println("\tAsmatzea: %" + noDiskAsmatzea + "\n");
+
+					System.out.println("Diskretizatuta:\n"
+							+ "------------------");
+					System.out.println("\tSailkatzailea: " + diskSailk);
+					System.out.println("\t" + diskFiltroa);
+					System.out.println("\tAsmatzea: %" + diskAsmatzea + "\n");
+
+					System.out.println("Gainbegiratu gabe diskretizatuta:\n"
+							+ "------------------");
+					System.out.println("\tSailkatzailea: " + uDiskSailk);
+					System.out.println("\t" + uDiskFiltroa);
+					System.out.println("\tAsmatzea: %" + uDiskAsmatzea + "\n");
 				}
 			} else
 				System.out
 						.println("Ez dituzu test eta train irudien fitxategien bidea sartu.\n"
 								+ "Hau da modu egokia:\n"
 								+ "\tjava -jar praktika.jar TrainIrudienBidea TestIrudienBidea [EmaitzakGordetzekoBidea]");
-
-			// bwTrain.close();
-			// bwTest.close();
-			// bwTrainD.close();
-			// bwTestD.close();
-
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,4 +1,4 @@
-package bertsioAurreratua;
+package frogak;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,8 +13,10 @@ import java.util.Vector;
 
 import magick.ImageInfo;
 import magick.MagickException;
-
 import weka.core.Instances;
+import bertsioAurreratua.Irudia;
+import bertsioAurreratua.MagickManager;
+import bertsioAurreratua.WekaManager;
 
 public class Lab1 {
 
@@ -62,7 +64,7 @@ public class Lab1 {
 		//
 		MagickManager mm = new MagickManager();
 		System.out.println(1);
-		mm.scale(vIrudiak);
+		//mm.scale(vIrudiak);
 		System.out.println(2);
 		//
 		

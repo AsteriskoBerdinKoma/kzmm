@@ -36,8 +36,7 @@ public class ARFFManager {
 		return arff;
 	}
 
-	public void toARFF(Vector<Irudia> vIrudiak, String filename) throws IOException, IllegalMotaException,
-			MagickException {
+	public void toARFF(Vector<Irudia> vIrudiak, String filename) throws IOException, MagickException {
 
 		int pixelKop = vIrudiak.firstElement().getPixelKop();
 

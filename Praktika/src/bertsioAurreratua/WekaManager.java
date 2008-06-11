@@ -22,7 +22,10 @@ import weka.filters.supervised.attribute.Discretize;
 
 public class WekaManager {
 	
-	Vector<String> sailkatzaileak;
+	private Vector<String> sailkatzaileak;
+	
+	private String sailkatzailea;
+	private double asmatzea;
 
 	public WekaManager() throws IOException {
 		sailkatzaileak = new Vector<String>();
@@ -200,6 +203,9 @@ public class WekaManager {
 						emaitzak +="SAILKATZAILEA: " + sailka+"\n";
 						emaitzak +="------------------------------------------------------------------\n";
 						emaitzak +=sailkatu.toSummaryString("\nResults\n=======\n", false);
+						
+						sailkatzailea = sailka;
+						asmatzea = sailkatu.pctCorrect();
 
 					} catch (UnsupportedClassTypeException e) {
 						//System.out.println("Errorea: KLASE atributu mota desegokia!\n");
@@ -255,5 +261,13 @@ public class WekaManager {
 			}
 			
 		}
+	}
+
+	public double getAsmatzea() {
+		return asmatzea;
+	}
+
+	public String getSailkatzailea() {
+		return sailkatzailea;
 	}
 }
