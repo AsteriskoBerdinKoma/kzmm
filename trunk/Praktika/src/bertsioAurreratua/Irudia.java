@@ -126,4 +126,16 @@ public class Irudia extends MagickImage {
 	public String getFitxIzen() {
 		return fitxIzen;
 	}
+
+	public String getFormatua() {
+		return formatua;
+	}
+
+	public ImageInfo getInfo() {
+		return info;
+	}
+
+	public int getKoloreKop() {
+		return koloreKop;
+	}
 }

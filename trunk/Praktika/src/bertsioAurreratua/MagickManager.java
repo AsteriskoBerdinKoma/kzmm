@@ -1,5 +1,7 @@
 package bertsioAurreratua;
 
+import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
@@ -98,6 +100,14 @@ public class MagickManager {
 			if (lag.contrastImage(true))
 				irudiak.addElement(lag);
 		}
+		return irudiak;
+	}
+
+	private MagickImages chop(Vector<Irudia> vIrudiak) throws MagickException {
+		MagickImages irudiak = new MagickImages("Chop");
+		irudiak.setAtributuak("3x3");
+		for (MagickImage irudia : vIrudiak)
+			irudiak.addElement(irudia.chopImage(new Rectangle(new Dimension(3, 3))));
 		return irudiak;
 	}
 
@@ -244,96 +254,9 @@ public class MagickManager {
 
 		vTrainIrudiFiltroekin.addElement(solarize(vTrainIrudiak));
 		vTestIrudiFiltroekin.addElement(solarize(vTestIrudiak));
-
 		
-		
-		// for (MagickImage iTest : vTestIrudiak) {
-		// // Blur
-		// testIrudiak.addElement(iTest.blurImage(0.25, 10));
-		//
-		// // Sharpen
-		// testIrudiak.addElement(iTest.sharpenImage(0.25, 85));
-		//
-		// // Threshold
-		// lag = iTest.cloneImage(0, 0, false);
-		// if (lag.thresholdImage(10))
-		// testIrudiak.addElement(lag);
-		//
-		// // Add Noise
-		// testIrudiak
-		// .addElement(iTest.addNoiseImage(NoiseType.GaussianNoise));
-		//
-		// // Charcoal
-		// testIrudiak.addElement(iTest.charcoalImage(4, 1));
-		//
-		// // Contrast
-		// lag = iTest.cloneImage(0, 0, false);
-		// if (lag.contrastImage(true))
-		// testIrudiak.addElement(lag);
-		//
-		// // Edge
-		// testIrudiak.addElement(iTest.edgeImage(3));
-		//
-		// // Emboss
-		// testIrudiak.addElement(iTest.embossImage(3, 0.25));
-		//
-		// // Equalize
-		// lag = iTest.cloneImage(0, 0, false);
-		// if (lag.equalizeImage())
-		// testIrudiak.addElement(lag);
-		//
-		// // Level
-		// lag = iTest.cloneImage(0, 0, false);
-		// if (lag.levelImage("black"))
-		// testIrudiak.addElement(lag);
-		//
-		// // Negative
-		// lag = iTest.cloneImage(0, 0, false);
-		// if (lag.negateImage(1))
-		// testIrudiak.addElement(lag);
-		//
-		// // Normalize
-		// lag = iTest.cloneImage(0, 0, false);
-		// if (lag.normalizeImage())
-		// testIrudiak.addElement(lag);
-		//
-		// // Segment
-		// lag = iTest.cloneImage(0, 0, false);
-		// lag.segmentImage(ColorspaceType.GRAYColorspace, 0.25, 1.5);
-		// testIrudiak.addElement(lag);
-		//
-		// // Solarize
-		// lag = iTest.cloneImage(0, 0, false);
-		// lag.solarizeImage(10);
-		// testIrudiak.addElement(lag);
-		//
-		// vTestIrudiFiltroekin.addElement(testIrudiak);
-		// }
-	}
-
-	public void scale(Vector<Irudia> ir) throws MagickException {
-		// ImageInfo info = new ImageInfo();
-		// MagickImage image = new MagickImage(new
-		// ImageInfo("BAIimg_00001.pgm"));
-		// MagickImage bigger = image.scaleImage(1200, 900);
-		// bigger.setFileName("froga/bigger.pgm");
-		// bigger.writeImage(info);
-
-		// for (Irudia i : ir) {
-		// // ImageInfo info = new ImageInfo();
-		// // MagickImage mi = i.scaleImage(2000, 900);
-		// // mi.setFileName("frogaScale/"+ i.getFitxIzen());
-		// // //System.out.println(1.1 + mi.getFileName() + " == " +
-		// // info.getFileName());
-		// // mi.writeImage(info);
-		// // System.out.println(1.2);
-		// // try {
-		// // i.irudiaGorde("frogaScale");
-		// // } catch (IOException e) {
-		// // // TODO Auto-generated catch block
-		// // e.printStackTrace();
-		// // }
-		// }
+		vTrainIrudiFiltroekin.addElement(chop(vTrainIrudiak));
+		vTestIrudiFiltroekin.addElement(chop(vTestIrudiak));
 	}
 
 	private class MagickImages extends Vector<MagickImage> {
@@ -374,7 +297,7 @@ public class MagickManager {
 	}
 
 	public boolean next() throws MagickException, IOException {
-		System.out.println(vTrainIrudiFiltroekin.size()-kontTrain);
+		System.out.println(vTrainIrudiFiltroekin.size() - kontTrain);
 		if (kontTrain < vTrainIrudiFiltroekin.size()
 				&& kontTest < vTestIrudiFiltroekin.size()) {
 			unekoTrains = vTrainIrudiFiltroekin.elementAt(kontTrain);
@@ -454,7 +377,7 @@ public class MagickManager {
 
 		File f = new File(path);
 		// Irudi zaharrak ezabatu eta karpeta berria sortu
-		//deleteDirectory(f);
+		// deleteDirectory(f);
 		f.mkdirs();
 
 		// Irudiaren fitxategiaren izena lortu
@@ -470,19 +393,19 @@ public class MagickManager {
 		return new Irudia(new ImageInfo(pathOsoa));
 	}
 
-	private boolean deleteDirectory(File path) {
-		if (path.exists()) {
-			File[] files = path.listFiles();
-			for (int i = 0; i < files.length; i++) {
-				if (files[i].isDirectory()) {
-					deleteDirectory(files[i]);
-				} else {
-					files[i].delete();
-				}
-			}
-		}
-		return (path.delete());
-	}
+//	private boolean deleteDirectory(File path) {
+//		if (path.exists()) {
+//			File[] files = path.listFiles();
+//			for (int i = 0; i < files.length; i++) {
+//				if (files[i].isDirectory()) {
+//					deleteDirectory(files[i]);
+//				} else {
+//					files[i].delete();
+//				}
+//			}
+//		}
+//		return (path.delete());
+//	}
 
 	public String getUnekoTestPath() {
 		return unekoTestPath;
