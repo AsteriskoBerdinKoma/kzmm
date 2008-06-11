@@ -255,27 +255,37 @@ public class Nagusia {
 					}
 
 					System.runFinalization();
-
-					System.out
-							.println("Bukatua. Hauek izan dira emaitzik onenak:");
-					System.out.println("Diskretizatu gabe:\n"
-							+ "------------------");
-					System.out.println("\tSailkatzailea: " + noDiskSailk);
-					System.out.println("\t" + noDiskFiltroa);
-					System.out.println("\tAsmatzea: %" + noDiskAsmatzea + "\n");
-
-					System.out.println("Diskretizatuta:\n"
-							+ "------------------");
-					System.out.println("\tSailkatzailea: " + diskSailk);
-					System.out.println("\t" + diskFiltroa);
-					System.out.println("\tAsmatzea: %" + diskAsmatzea + "\n");
-
-					System.out.println("Gainbegiratu gabe diskretizatuta:\n"
-							+ "------------------");
-					System.out.println("\tSailkatzailea: " + uDiskSailk);
-					System.out.println("\t" + uDiskFiltroa);
-					System.out.println("\tAsmatzea: %" + uDiskAsmatzea + "\n");
 				}
+
+				f1.delete();
+				f2.delete();
+				f3.delete();
+				f4.delete();
+				f5.delete();
+				f6.delete();
+				f7.delete();
+				f8.delete();
+				f9.delete();
+
+				deleteDirectory(new File("irudiak"));
+
+				System.out.println("Bukatua. Hauek izan dira emaitzik onenak:");
+				System.out.println("Diskretizatu gabe:\n"
+						+ "------------------");
+				System.out.println("\tSailkatzailea: " + noDiskSailk);
+				System.out.println("\t" + noDiskFiltroa);
+				System.out.println("\tAsmatzea: %" + noDiskAsmatzea + "\n");
+
+				System.out.println("Diskretizatuta:\n" + "------------------");
+				System.out.println("\tSailkatzailea: " + diskSailk);
+				System.out.println("\t" + diskFiltroa);
+				System.out.println("\tAsmatzea: %" + diskAsmatzea + "\n");
+
+				System.out.println("Gainbegiratu gabe diskretizatuta:\n"
+						+ "------------------");
+				System.out.println("\tSailkatzailea: " + uDiskSailk);
+				System.out.println("\t" + uDiskFiltroa);
+				System.out.println("\tAsmatzea: %" + uDiskAsmatzea + "\n");
 			} else
 				System.out
 						.println("Ez dituzu test eta train irudien fitxategien bidea sartu.\n"
