@@ -297,7 +297,7 @@ public class MagickManager {
 	}
 
 	public boolean next() throws MagickException, IOException {
-		System.out.println(vTrainIrudiFiltroekin.size() - kontTrain);
+		System.out.println(vTrainIrudiFiltroekin.size() - kontTrain +" filtro gelditzen dira");
 		if (kontTrain < vTrainIrudiFiltroekin.size()
 				&& kontTest < vTestIrudiFiltroekin.size()) {
 			unekoTrains = vTrainIrudiFiltroekin.elementAt(kontTrain);
