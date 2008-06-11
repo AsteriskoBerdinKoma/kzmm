@@ -1,0 +1,45 @@
+Oinarrizko bertsioaren exekuzioari buruzko oharrak
+==================================================
+
+ * Ezer egiten hasi baino lehen, Weka, ImageMagick eta Java 6 programak
+   eskuratu behar dira. Lehenengoa, ondoko helbidean eskura daiteke:
+
+   	http://www.cs.waikato.ac.nz/ml/weka/
+
+   Bigarrena, Synaptic bitartez jaitsi daiteke, imagemagick bilatuta.
+
+   Azkena, Synaptic bitartez ere, sun-java6-jdk bilatuta.
+   
+   Praktika hau, Linux ingurunean egikaritzeko prestatuta dago.
+
+ * Irudiak filtratzeko applyFilter.sh /TR eta /TS azpikatalogoak
+   dituen katalogora kopiatu, hau da, irudi-sortaren katalogora.
+ 
+	Ad:
+		$ ls /home/erabiltzaile/kzmm/TRTS2
+		TR
+		TS
+		applyFilter.sh
+
+ * applyFilter.sh-i exekuzio baimenak eman.
+
+		$ chmod +x applyFilter.sh
+
+ * applyFilter.sh exekutatu erabili nahi duzun filtroa adierazita.
+   Honek TR_filtroa eta TS_filtroa katalogoak sortuko ditu irudien
+   kopia filtratuarekin.
+
+	Ad:
+		$ sh applyFilter.sh chop 3x3
+
+ * Hau eginda, praktika.jar egikaritu ARFF fitxategiak sortzeko.
+   (ARFF fitxategiak, praktika.jar-en katalogoan sortuko dira).
+
+		$ java -jar praktika.jar
+
+ * Azkenik, weka ireki sortu ditugun ARFF fitxategiekin 
+   sailkatzaile desberdinak ikasteko.
+
+		$ java -jar weka.jar
+
+	
