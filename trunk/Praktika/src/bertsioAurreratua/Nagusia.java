@@ -179,8 +179,9 @@ public class Nagusia {
 					f7.delete();
 					f8.delete();
 					f9.delete();
-					
-					System.out.println("Uneko filtroa:\n\t"+irudiKud.getUnekoFiltroa());
+
+					System.out.println("Uneko filtroa: "
+							+ irudiKud.getUnekoFiltroa() + "\n");
 
 					vTrain = irudiKud.getUnekoTrain();
 					vTest = irudiKud.getUnekoTest();
@@ -202,7 +203,7 @@ public class Nagusia {
 							new File(pathTrainIrudiak).list().length);
 
 					String unekoFiltro = irudiKud.getUnekoFiltroa();
-					
+
 					System.out.println("DISKRETIZATU GABEKO SAILKAPENA...\n");
 					emaitza = wekaKud.classify("TRAIN.arff", "TEST.arff");
 					bwEmaitza = new BufferedWriter(new FileWriter(
@@ -240,7 +241,8 @@ public class Nagusia {
 						diskFiltroa = irudiKud.getUnekoInfo();
 					}
 
-					System.out.println("GAINBEGIRATU GABEKO DISKRETIZATUTAKO SAILKAPENA...\n");
+					System.out
+							.println("GAINBEGIRATU GABEKO DISKRETIZATUTAKO SAILKAPENA...\n");
 					emaitzaUD = wekaKud.classify("TRAINUD.arff", "TESTUD.arff");
 					bwEmaitzaUD = new BufferedWriter(new FileWriter(
 							uDiskEmaitzenDir + File.separator + unekoFiltro
