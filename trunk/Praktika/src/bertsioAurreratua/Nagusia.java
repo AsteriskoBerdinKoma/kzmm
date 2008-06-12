@@ -235,7 +235,7 @@ public class Nagusia {
 					// bwEmaitzaD.write(emaitzaD);
 					bwEmaitzaD.close();
 
-					if (wekaKud.getAsmatzea() > noDiskAsmatzea) {
+					if (wekaKud.getAsmatzea() > diskAsmatzea) {
 						diskAsmatzea = wekaKud.getAsmatzea();
 						diskSailk = wekaKud.getSailkatzailea();
 						diskFiltroa = irudiKud.getUnekoInfo();
@@ -255,7 +255,7 @@ public class Nagusia {
 					// bwEmaitzaUD.write(emaitzaUD);
 					bwEmaitzaUD.close();
 
-					if (wekaKud.getAsmatzea() > noDiskAsmatzea) {
+					if (wekaKud.getAsmatzea() > uDiskAsmatzea) {
 						uDiskAsmatzea = wekaKud.getAsmatzea();
 						uDiskSailk = wekaKud.getSailkatzailea();
 						uDiskFiltroa = irudiKud.getUnekoInfo();
@@ -283,13 +283,13 @@ public class Nagusia {
 				System.out.println("\t" + noDiskFiltroa);
 				System.out.println("\tAsmatzea: %" + noDiskAsmatzea + "\n");
 
-				System.out.println("Diskretizatuta:\n" + "------------------");
+				System.out.println("Diskretizatuta:\n" + "---------------");
 				System.out.println("\tSailkatzailea: " + diskSailk);
 				System.out.println("\t" + diskFiltroa);
 				System.out.println("\tAsmatzea: %" + diskAsmatzea + "\n");
 
 				System.out.println("Gainbegiratu gabe diskretizatuta:\n"
-						+ "------------------");
+						+ "---------------------------------");
 				System.out.println("\tSailkatzailea: " + uDiskSailk);
 				System.out.println("\t" + uDiskFiltroa);
 				System.out.println("\tAsmatzea: %" + uDiskAsmatzea + "\n");
