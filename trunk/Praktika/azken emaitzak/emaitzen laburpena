@@ -1,0 +1,25 @@
+Bukatua. Hauek izan dira emaitzik onenak:
+Diskretizatu gabe:
+------------------
+	Sailkatzailea: weka.classifiers.meta.AttributeSelectedClassifier
+	Filtroa: Emboss
+Atributuak:
+	radius: 3, sigma: 0,25
+	Asmatzea: %90.81632653061224
+
+Diskretizatuta:
+---------------
+	Sailkatzailea: weka.classifiers.functions.SMO
+	Filtroa: Sharpen
+Atributuak:
+	radius: 0.25, sigma: 85
+	Asmatzea: %96.93877551020408
+
+Gainbegiratu gabe diskretizatuta:
+---------------------------------
+	Sailkatzailea: weka.classifiers.lazy.IB1
+	Filtroa: Normalize
+Atributuak:
+	null
+	Asmatzea: %92.85714285714286
+
