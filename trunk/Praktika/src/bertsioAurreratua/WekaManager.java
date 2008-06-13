@@ -21,11 +21,12 @@ import weka.filters.Filter;
 import weka.filters.supervised.attribute.Discretize;
 
 public class WekaManager {
-	
+
 	private Vector<String> sailkatzaileak;
-	
-	private String sailkatzailea;
-	private double asmatzea;
+
+	private String sailkatzaileOnena;
+
+	private double onenarenAsmatzea;
 
 	public WekaManager() throws IOException {
 		sailkatzaileak = new Vector<String>();
@@ -43,7 +44,7 @@ public class WekaManager {
 
 		return result;
 	}
-	
+
 	private Instances loadData(String data) throws IOException {
 		BufferedReader reader = new BufferedReader(new StringReader(data));
 		return new Instances(reader);
@@ -132,8 +133,9 @@ public class WekaManager {
 		output = Filter.useFilter(input, filter);
 		return output.toString();
 	}
-	
-	public void discretizeUnsupervised(String allInputFilename, String allOutputFilename) throws Exception {
+
+	public void discretizeUnsupervised(String allInputFilename,
+			String allOutputFilename) throws Exception {
 		Instances inputAll;
 		Instances outputAll;
 		weka.filters.unsupervised.attribute.Discretize filter;
@@ -144,7 +146,7 @@ public class WekaManager {
 		// setup filter
 		filter = new weka.filters.unsupervised.attribute.Discretize();
 		filter.setInputFormat(inputAll);
-		filter.setBins(4); //Balio posibleak: 4, 6, 10 eta 20
+		filter.setBins(4); // Balio posibleak: 4, 6, 10 eta 20
 
 		// apply filter
 		outputAll = Filter.useFilter(inputAll, filter);
@@ -153,82 +155,99 @@ public class WekaManager {
 		save(outputAll, allOutputFilename);
 	}
 
-//	public void classify(String classifier, String[] options, Instances train,
-//			Instances test) throws Exception {
-//		// train classifier
-//		// Classifier cls = Classifier.forName(classifier, options);
-//		Classifier cls = new NaiveBayes();
-//		cls.buildClassifier(train);
-//		// evaluate classifier and print some statistics
-//		Evaluation eval = new Evaluation(train);
-//		eval.evaluateModel(cls, test);
-//		System.out.println(eval.toSummaryString("\nResults\n=======\n", false));
-//	}
+	// public void classify(String classifier, String[] options, Instances
+	// train,
+	// Instances test) throws Exception {
+	// // train classifier
+	// // Classifier cls = Classifier.forName(classifier, options);
+	// Classifier cls = new NaiveBayes();
+	// cls.buildClassifier(train);
+	// // evaluate classifier and print some statistics
+	// Evaluation eval = new Evaluation(train);
+	// eval.evaluateModel(cls, test);
+	// System.out.println(eval.toSummaryString("\nResults\n=======\n", false));
+	// }
 
-	public String classify(String trainFile, String testFile) throws FileNotFoundException, IOException {
+	public String classify(String trainFile, String testFile)
+			throws FileNotFoundException, IOException {
 		/*
 		 * Sarrerako ARFF fitxategiek beharrezkoa duten preprozesamendu
 		 * tratamendua eginda edukiko dute metodo hau deitzeko unean.
 		 */
-		
+
 		String emaitzak = "";
-		
-		//Entrenamenduko fitxategiaren instantzia
+
+		// Entrenamenduko fitxategiaren instantzia
 		Instances trainDB = new Instances(new BufferedReader(new FileReader(
 				trainFile)));
 		trainDB.setClassIndex(trainDB.numAttributes() - 1);
-		
+
+		sailkatzaileOnena = "";
+		onenarenAsmatzea = -1;
+
 		for (String sailka : sailkatzaileak) {
 			try {
 				String sailkIzena = sailka;
 				String[] sailkAukerak = null;
-				Classifier sailk = Classifier.forName(sailkIzena,sailkAukerak);
+				Classifier sailk = Classifier.forName(sailkIzena, sailkAukerak);
 
-				//These classifiers take too much time to classify, so we skip them
-				if (sailka.equals("weka.classifiers.functions.MultilayerPerceptron") || 
-					sailka.equals("weka.classifiers.trees.NBTree") ||
-					sailka.equals("weka.classifiers.lazy.LBR") ||
-					sailka.equals("weka.classifiers.trees.UserClassifier")) {
-					// ...UserClassifier: prompts a panel to define the desired tree
-					// ...LBR: Takes too much time, but only with discretized ARFF files
-				} else {	
+				// These classifiers take too much time to classify, so we skip
+				// them
+				if (sailka
+						.equals("weka.classifiers.functions.MultilayerPerceptron")
+						|| sailka.equals("weka.classifiers.trees.NBTree")
+						|| sailka.equals("weka.classifiers.lazy.LBR")
+						|| sailka
+								.equals("weka.classifiers.trees.UserClassifier")) {
+					// ...UserClassifier: prompts a panel to define the desired
+					// tree
+					// ...LBR: Takes too much time, but only with discretized
+					// ARFF files
+				} else {
 					try {
 						sailk.buildClassifier(trainDB);
-						Instances testDB = new Instances(new BufferedReader(new FileReader(testFile)));
+						Instances testDB = new Instances(new BufferedReader(
+								new FileReader(testFile)));
 						testDB.setClassIndex(testDB.numAttributes() - 1);
-						
+
 						Evaluation sailkatu = new Evaluation(trainDB);
 						sailkatu.evaluateModel(sailk, testDB);
-						emaitzak +="\n\n";
-						emaitzak +="SAILKATZAILEA: " + sailka+"\n";
-						emaitzak +="------------------------------------------------------------------\n";
-						emaitzak +=sailkatu.toSummaryString("\nResults\n=======\n", false);
-						
-						sailkatzailea = sailka;
-						asmatzea = sailkatu.pctCorrect();
+						emaitzak += "\n\n";
+						emaitzak += "SAILKATZAILEA: " + sailka + "\n";
+						emaitzak += "------------------------------------------------------------------\n";
+						emaitzak += sailkatu.toSummaryString(
+								"\nResults\n=======\n", false);
+
+						double emaitza = sailkatu.pctCorrect();
+						if (emaitza > onenarenAsmatzea) {
+							sailkatzaileOnena = sailka;
+							onenarenAsmatzea = sailkatu.pctCorrect();
+						}
 
 					} catch (UnsupportedClassTypeException e) {
-						//System.out.println("Errorea: KLASE atributu mota desegokia!\n");
-						//e.printStackTrace();
+						// System.out.println("Errorea: KLASE atributu mota
+						// desegokia!\n");
+						// e.printStackTrace();
 					} catch (UnsupportedAttributeTypeException e) {
-						//System.out.println("Errorea: INSTANTZIA atributu mota desegokiak!\n");
-						//e.printStackTrace();
-					} catch (Exception e){
-						//System.out.println("Errorea: ARFF desegokia!\n");
-						//e.printStackTrace();
+						// System.out.println("Errorea: INSTANTZIA atributu mota
+						// desegokiak!\n");
+						// e.printStackTrace();
+					} catch (Exception e) {
+						// System.out.println("Errorea: ARFF desegokia!\n");
+						// e.printStackTrace();
 					}
 				}
 			} catch (Exception e) {
 				System.out.println("Errorea: Ez da sailkatzailea!\n");
 				e.printStackTrace();
-				
+
 			}
 		}
 		return emaitzak;
 
 	}
-	
-	public void getSailkatzaileZerrenda() throws IOException{
+
+	public void getSailkatzaileZerrenda() throws IOException {
 		Vector<String> s = new Vector<String>();
 		JarFile weka = new JarFile("./lib/weka.jar");
 		Enumeration<JarEntry> classes = weka.entries();
@@ -254,20 +273,20 @@ public class WekaManager {
 			try {
 				String sailkIzena = sailka;
 				String[] sailkAukerak = null;
-				Classifier.forName(sailkIzena,sailkAukerak);
+				Classifier.forName(sailkIzena, sailkAukerak);
 				sailkatzaileak.add(sailkIzena);
 			} catch (Exception e) {
-				//e.printStackTrace();
+				// e.printStackTrace();
 			}
-			
+
 		}
 	}
 
-	public double getAsmatzea() {
-		return asmatzea;
+	public double getOnenarenAsmatzea() {
+		return onenarenAsmatzea;
 	}
 
-	public String getSailkatzailea() {
-		return sailkatzailea;
+	public String getSailkatzaileOnena() {
+		return sailkatzaileOnena;
 	}
 }

@@ -118,9 +118,9 @@ public class Nagusia {
 				bwEmaitza.write(emaitza);
 				bwEmaitza.close();
 
-				if (wekaKud.getAsmatzea() > noDiskAsmatzea) {
-					noDiskAsmatzea = wekaKud.getAsmatzea();
-					noDiskSailk = wekaKud.getSailkatzailea();
+				if (wekaKud.getOnenarenAsmatzea() > noDiskAsmatzea) {
+					noDiskAsmatzea = wekaKud.getOnenarenAsmatzea();
+					noDiskSailk = wekaKud.getSailkatzaileOnena();
 					noDiskFiltroa = "Filtrorik gabe";
 				}
 
@@ -133,9 +133,9 @@ public class Nagusia {
 				bwEmaitzaD.write(emaitzaD);
 				bwEmaitzaD.close();
 
-				if (wekaKud.getAsmatzea() > noDiskAsmatzea) {
-					diskAsmatzea = wekaKud.getAsmatzea();
-					diskSailk = wekaKud.getSailkatzailea();
+				if (wekaKud.getOnenarenAsmatzea() > diskAsmatzea) {
+					diskAsmatzea = wekaKud.getOnenarenAsmatzea();
+					diskSailk = wekaKud.getSailkatzaileOnena();
 					diskFiltroa = "Filtrorik gabe";
 				}
 
@@ -150,9 +150,9 @@ public class Nagusia {
 				bwEmaitzaUD.write(emaitzaUD);
 				bwEmaitzaUD.close();
 
-				if (wekaKud.getAsmatzea() > noDiskAsmatzea) {
-					uDiskAsmatzea = wekaKud.getAsmatzea();
-					uDiskSailk = wekaKud.getSailkatzailea();
+				if (wekaKud.getOnenarenAsmatzea() > uDiskAsmatzea) {
+					uDiskAsmatzea = wekaKud.getOnenarenAsmatzea();
+					uDiskSailk = wekaKud.getSailkatzaileOnena();
 					uDiskFiltroa = "Filtrorik gabe";
 				}
 
@@ -216,9 +216,9 @@ public class Nagusia {
 					// bwEmaitza.write(emaitza);
 					bwEmaitza.close();
 
-					if (wekaKud.getAsmatzea() > noDiskAsmatzea) {
-						noDiskAsmatzea = wekaKud.getAsmatzea();
-						noDiskSailk = wekaKud.getSailkatzailea();
+					if (wekaKud.getOnenarenAsmatzea() > noDiskAsmatzea) {
+						noDiskAsmatzea = wekaKud.getOnenarenAsmatzea();
+						noDiskSailk = wekaKud.getSailkatzaileOnena();
 						noDiskFiltroa = irudiKud.getUnekoInfo();
 					}
 
@@ -235,9 +235,9 @@ public class Nagusia {
 					// bwEmaitzaD.write(emaitzaD);
 					bwEmaitzaD.close();
 
-					if (wekaKud.getAsmatzea() > diskAsmatzea) {
-						diskAsmatzea = wekaKud.getAsmatzea();
-						diskSailk = wekaKud.getSailkatzailea();
+					if (wekaKud.getOnenarenAsmatzea() > diskAsmatzea) {
+						diskAsmatzea = wekaKud.getOnenarenAsmatzea();
+						diskSailk = wekaKud.getSailkatzaileOnena();
 						diskFiltroa = irudiKud.getUnekoInfo();
 					}
 
@@ -255,9 +255,9 @@ public class Nagusia {
 					// bwEmaitzaUD.write(emaitzaUD);
 					bwEmaitzaUD.close();
 
-					if (wekaKud.getAsmatzea() > uDiskAsmatzea) {
-						uDiskAsmatzea = wekaKud.getAsmatzea();
-						uDiskSailk = wekaKud.getSailkatzailea();
+					if (wekaKud.getOnenarenAsmatzea() > uDiskAsmatzea) {
+						uDiskAsmatzea = wekaKud.getOnenarenAsmatzea();
+						uDiskSailk = wekaKud.getSailkatzaileOnena();
 						uDiskFiltroa = irudiKud.getUnekoInfo();
 					}
 
